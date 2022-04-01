@@ -6,7 +6,7 @@
 #    By: ael-azra <ael-azra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/01 10:02:58 by ael-azra          #+#    #+#              #
-#    Updated: 2022/04/01 10:23:25 by ael-azra         ###   ########.fr        #
+#    Updated: 2022/04/01 10:46:29 by ael-azra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ FLAG = -Wall -Wextra -Werror -std=c++98
 
 OBJS = $(SRC:.cpp=.o)
 
-INC = 
+INC = ./Stack.hpp
 
 all: $(NAME)
 

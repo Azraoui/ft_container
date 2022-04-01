@@ -6,13 +6,14 @@
 /*   By: ael-azra <ael-azra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 10:23:36 by ael-azra          #+#    #+#             */
-/*   Updated: 2022/04/01 10:28:36 by ael-azra         ###   ########.fr       */
+/*   Updated: 2022/04/01 11:41:36 by ael-azra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "Stack.hpp"
 
 int main()
 {
+	
 	return 0;
 }
