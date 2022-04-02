@@ -6,27 +6,27 @@
 /*   By: ael-azra <ael-azra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 10:23:36 by ael-azra          #+#    #+#             */
-/*   Updated: 2022/04/02 14:25:44 by ael-azra         ###   ########.fr       */
+/*   Updated: 2022/04/02 14:56:15 by ael-azra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "Stack.hpp"
+#include <vector>
 #include <iostream>
-#include <string.h>
 
-char*	fs(void)
-{
-	char *s;
-	s = strdup("kdjjfkdjfk");
-	return s;
-}
-void a()
-{
-	fs();
-}
+using namespace std;
+
+typedef vector<int>::iterator iter;
+
 int main()
 {
-	a();
-	system("leaks a.out");	
+vector<int> g1;
+  
+	for (int i = 1; i <= 5; i++)
+		g1.push_back(i);
+
+	cout << "Output of begin and end: ";
+	for (iter i = g1.begin(); i != g1.end(); ++i)
+		cout << *i << " ";
+  
 	return 0;
 }
