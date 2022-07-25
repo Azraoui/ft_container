@@ -5,11 +5,17 @@
 
 namespace ft
 {
-	template < typename T, typename Alloc = std::allocator<T> >
+	template < class _Tp, class _Allocator = std::allocator<_Tp> >
 	class vector
 	{
-		private:
-			
+		protected:
+			typedef	_Allocator				allocator_type;
+			typedef	_Tp						value_type;
+			typedef	value_type&				reference;
+			typedef	const value_type&		const_reference;
+			typedef	value_type*				pointer;
+			typedef	value_type*				const_pointer;
+			typedef	size_t					size_type;
 
 		public:
 
