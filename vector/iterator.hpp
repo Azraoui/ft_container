@@ -6,7 +6,7 @@
 /*   By: ael-azra <ael-azra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 13:52:20 by ael-azra          #+#    #+#             */
-/*   Updated: 2022/07/26 16:06:39 by ael-azra         ###   ########.fr       */
+/*   Updated: 2022/07/26 19:06:11 by ael-azra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ namespace ft
 				typename Distance = ptrdiff_t,		// iterator::difference_type
 				typename Pointer = _Tp*,			// iterator::pointer
 				typename Reference = _Tp& >			// iterator::reference
-	struct iterator
+	class iterator
 	{
 		public:
 			typedef _Tp			value_type;
