@@ -4,7 +4,7 @@ MAIN = ./main.cpp
 
 SRC = $(MAIN)
 
-INC = ./vector/* ./stack/* ./map/*
+INC = ./vector/*
 
 FLAG = -Wall -Wextra -Werror -std=c++98
 
