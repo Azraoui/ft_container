@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iterators.tpp                                      :+:      :+:    :+:   */
+/*   random_access_iterator.tpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ael-azra <ael-azra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 11:53:31 by ael-azra          #+#    #+#             */
-/*   Updated: 2022/07/26 20:31:39 by ael-azra         ###   ########.fr       */
+/*   Updated: 2022/07/28 22:43:06 by ael-azra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,58 +35,58 @@ random_access_iterator< _Tp > & random_access_iterator< _Tp>::operator = (const 
 }
 
 template < typename _Tp >
-bool random_access_iterator< _Tp >::operator == (const random_access_iterator &obj)
+bool random_access_iterator< _Tp >::operator == (const random_access_iterator &obj) const
 {
 	return (this->_base == obj._base);
 }
 
-template < typename _Tp >
-bool random_access_iterator< _Tp >::operator != (const random_access_iterator &obj)
-{
-	return (this->_base != obj._base);
-}
+// template < typename _Tp >
+// bool random_access_iterator< _Tp >::operator != (const random_access_iterator &obj)
+// {
+// 	return (this->_base != obj._base);
+// }
 
 template < typename _Tp >
 typename random_access_iterator< _Tp >::value_type random_access_iterator< _Tp >::operator * (void) const
 {
-	return (*(this->_base));
+	return (*this->_base);
 }
 
-template < typename _Tp >
-typename random_access_iterator< _Tp>::ptr random_access_iterator< _Tp>::operator -> (void) const
-{
-	return (this->_base);
-}
+// template < typename _Tp >
+// typename random_access_iterator< _Tp>::ptr random_access_iterator< _Tp>::operator -> (void) const
+// {
+// 	return (this->_base);
+// }
 
-template < typename _Tp >
-random_access_iterator< _Tp > & random_access_iterator< _Tp >::operator ++ (void)
-{
-	ptr *tmp = this->_base;
-	this->base++;
-	return (*tmp);
-}
+// template < typename _Tp >
+// random_access_iterator< _Tp > & random_access_iterator< _Tp >::operator ++ (void)
+// {
+// 	ptr *tmp = this->_base;
+// 	this->base++;
+// 	return (*tmp);
+// }
 
-template < typename _Tp >
-random_access_iterator< _Tp > random_access_iterator< _Tp >::operator ++ (int)
-{
-	this->base++;
-	return (this);
-}
+// template < typename _Tp >
+// random_access_iterator< _Tp > random_access_iterator< _Tp >::operator ++ (int)
+// {
+// 	this->base++;
+// 	return (this);
+// }
 
-template < typename _Tp >
-random_access_iterator< _Tp > & random_access_iterator< _Tp >::operator -- (void)
-{
-	ptr *tmp = this->_base;
-	this->base--;
-	return (*tmp);
-}
+// template < typename _Tp >
+// random_access_iterator< _Tp > & random_access_iterator< _Tp >::operator -- (void)
+// {
+// 	ptr *tmp = this->_base;
+// 	this->base--;
+// 	return (*tmp);
+// }
 
-template < typename _Tp >
-random_access_iterator< _Tp > random_access_iterator< _Tp >::operator -- (int)
-{
-	this->base--;
-	return (this);
-}
+// template < typename _Tp >
+// random_access_iterator< _Tp > random_access_iterator< _Tp >::operator -- (int)
+// {
+// 	this->base--;
+// 	return (this);
+// }
 
 /* end of random_access_iterator */
 
