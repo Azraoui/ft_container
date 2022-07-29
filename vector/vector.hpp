@@ -6,7 +6,7 @@
 /*   By: ael-azra <ael-azra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 11:53:39 by ael-azra          #+#    #+#             */
-/*   Updated: 2022/07/27 23:28:41 by ael-azra         ###   ########.fr       */
+/*   Updated: 2022/07/29 16:47:29 by ael-azra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,13 @@ namespace ft
 			// Member functions:
 			
 			//	* Iterators:
-			// iterator		begin(); // Return iterator to beginning
-			// iterator		end(); // Return iterator to end
-			// const_iterator	cbegin(); // Return const_iterator to beginning
-			// const_iterator	cend(); // Return const_iterator to end
+			iterator		begin(); // Return iterator to beginning
+			iterator		end(); // Return iterator to end
+			const_iterator	cbegin(); // Return const_iterator to beginning
+			const_iterator	cend(); // Return const_iterator to end
 	};
 }
+
+#include "vectorIterators.tpp"
 
 #endif

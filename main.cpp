@@ -6,7 +6,7 @@
 /*   By: ael-azra <ael-azra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 21:46:04 by ael-azra          #+#    #+#             */
-/*   Updated: 2022/07/28 01:27:57 by ael-azra         ###   ########.fr       */
+/*   Updated: 2022/07/29 16:48:50 by ael-azra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@ int main()
 	v.push_back(2);
 	v.push_back(3);
 	v.push_back(4);
-	std::vector<int>::iterator it;
-	std::vector<int>::iterator it2;
+	std::vector<int>::iterator it = v.begin();
+	std::vector<int>::iterator it2 = v.end() - 1;
 	
-	int *a = new int[3];
-	int *b = a;
+	// int *a = new int[3];
+	// int *b = a; 
 
-	std::cout << "a = " << a << std::endl;
-	if (a == b)
-		std::cout << "Yes" << std::endl;
-	else
-		std::cout << "No" << std::endl;
+	// std::cout << "a = " << a << std::endl;
+	// if (a == b)
+	// 	std::cout << "Yes" << std::endl;
+	// else
+	// 	std::cout << "No" << std::endl;
 		
 	std::cout << "\n*****************\n";
 	
@@ -50,14 +50,15 @@ int main()
 
 	std::cout << "\nTest My Vector\n";
 	
-	ft::vector<int>::iterator i1;
-	ft::vector<int>::iterator i2;
-	if (i1 == i2)
-		std::cout << "Yes" << std::endl;
-	else
-		std::cout << "No" << std::endl;
+	// ft::vector<int>::iterator i2;
+	// ft::vector<int>::iterator i4;
+	// // ft::vector<int>::iterator i2;
+	// if (i4 == i2)
+	// 	std::cout << "Yes" << std::endl;
+	// else
+	// 	std::cout << "No" << std::endl;
 	
-	std::cout << *i2 << " " << *i1 <<  std::endl;
+	// std::cout << *i4 << " " << *i2 <<  std::endl;
 	
 	return 0;
 }

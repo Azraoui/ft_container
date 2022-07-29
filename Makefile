@@ -6,7 +6,7 @@
 #    By: ael-azra <ael-azra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/26 14:26:26 by ael-azra          #+#    #+#              #
-#    Updated: 2022/07/26 17:36:50 by ael-azra         ###   ########.fr        #
+#    Updated: 2022/07/29 16:45:44 by ael-azra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,9 @@ SRC = $(MAIN)
 
 INC = ./vector/*
 
-FLAG = -Wall -Wextra -Werror -std=c++98
+DBUG = -fsanitize=address -g
+
+FLAG = -Wall -Wextra -Werror -std=c++98 $(DBUG)
 
 CP = c++ $(FLAG)
 

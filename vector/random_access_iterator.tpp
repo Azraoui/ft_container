@@ -6,7 +6,7 @@
 /*   By: ael-azra <ael-azra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 11:53:31 by ael-azra          #+#    #+#             */
-/*   Updated: 2022/07/28 22:43:06 by ael-azra         ###   ########.fr       */
+/*   Updated: 2022/07/29 16:43:25 by ael-azra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /* start of  random_access_iterator */
 
 template < typename _Tp >
-random_access_iterator< _Tp >::random_access_iterator() {}
+random_access_iterator< _Tp >::random_access_iterator(): _base() {}
 
 template < typename _Tp >
 random_access_iterator< _Tp >::random_access_iterator(const random_access_iterator & obj)
@@ -49,7 +49,7 @@ bool random_access_iterator< _Tp >::operator == (const random_access_iterator &o
 template < typename _Tp >
 typename random_access_iterator< _Tp >::value_type random_access_iterator< _Tp >::operator * (void) const
 {
-	return (*this->_base);
+	return (*_base);
 }
 
 // template < typename _Tp >
@@ -89,38 +89,3 @@ typename random_access_iterator< _Tp >::value_type random_access_iterator< _Tp >
 // }
 
 /* end of random_access_iterator */
-
-
-// #ifndef	__ITERATORS_HPP__
-// # define __ITERATORS_HPP__
-
-// // Bismillah allahoma zidna 3ilma
-
-
-// template <class _Tp, class _Allocator> // Return iterator to beginning
-// typename ft::vector<_Tp, _Allocator>::iterator ft::vector<_Tp, _Allocator>::begin()
-// {
-// 	return (this->_begin);
-// }
-
-// template <class _Tp, class _Allocator> // Return iterator to end
-// typename ft::vector<_Tp, _Allocator>::iterator ft::vector<_Tp, _Allocator>::end()
-// {
-// 	return (this->_end);
-// }
-
-
-// template <class _Tp, class _Allocator> // Return const_iterator to beginning
-// typename ft::vector<_Tp, _Allocator>::const_iterator ft::vector<_Tp, _Allocator>::cbegin()
-// {
-// 	return (this->_begin);
-// }
-
-// template <class _Tp, class _Allocator> // Return const_iterator to end
-// typename ft::vector<_Tp, _Allocator>::const_iterator ft::vector<_Tp, _Allocator>::cend()
-// {
-// 	return (this->_end);
-// }
-
-
-// #endif
