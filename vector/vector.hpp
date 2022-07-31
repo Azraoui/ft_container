@@ -6,7 +6,7 @@
 /*   By: ael-azra <ael-azra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 11:53:39 by ael-azra          #+#    #+#             */
-/*   Updated: 2022/07/29 16:47:29 by ael-azra         ###   ########.fr       */
+/*   Updated: 2022/07/31 14:53:01 by ael-azra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ namespace ft
 			typedef	typename	allocator_type::const_reference	const_reference;
 			typedef	typename	allocator_type::pointer			pointer;
 			typedef	typename	allocator_type::const_pointer	const_pointer;
-			typedef				random_access_iterator< _Tp >	iterator;
+			typedef				random_access_iterator< pointer >	iterator;
 			typedef				const_pointer					const_iterator;
 
 		protected: 							// private attributes
@@ -55,5 +55,6 @@ namespace ft
 }
 
 #include "vectorIterators.tpp"
+#include "vector.tpp"
 
 #endif
