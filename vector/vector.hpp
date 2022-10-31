@@ -1,60 +1,33 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   vector.hpp                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ael-azra <ael-azra@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/26 11:53:39 by ael-azra          #+#    #+#             */
-/*   Updated: 2022/07/31 14:53:01 by ael-azra         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#ifndef __VECTOR_HPP__
-#define __VECTOR_HPP__
-
+#pragma once
+#include <memory> // refernce to allocator
 #include <iostream>
-#include "random_access_iterator.hpp"
 
 namespace ft
 {
-	template < typename _Tp, typename _Allocator = std::allocator<_Tp> >
+	template <class T, class Alloc = std::allocator<T>>
 	class vector
 	{
-		public:
-
-			// Member types
-			typedef				_Allocator						allocator_type;
-			typedef	typename	allocator_type::value_type		value_type;
-			typedef	typename	allocator_type::size_type		size_type;
-			typedef	typename	allocator_type::reference		reference;
-			typedef	typename	allocator_type::const_reference	const_reference;
-			typedef	typename	allocator_type::pointer			pointer;
-			typedef	typename	allocator_type::const_pointer	const_pointer;
-			typedef				random_access_iterator< pointer >	iterator;
-			typedef				const_pointer					const_iterator;
-
-		protected: 							// private attributes
-			pointer				_begin;
-			pointer				_end;
+		private:
+			/* data */
 
 		public:
-			// constructor and destructor:
-			vector();
-			~vector();
-			vector & operator = (const vector &obj);
+			typedef T value_type;
+			typedef typename Alloc<T> allocator_type;
+			typedef typename allocator_type::reference reference;
+			typedef typename allocator_type::const_reference const_reference;
+			typedef typename allocator_type::pointer pointer;
+			typedef typename allocator_type::const_pointer const_pointer;
+			typedef size_t size_type
 
-			// Member functions:
-			
-			//	* Iterators:
-			iterator		begin(); // Return iterator to beginning
-			iterator		end(); // Return iterator to end
-			const_iterator	cbegin(); // Return const_iterator to beginning
-			const_iterator	cend(); // Return const_iterator to end
+		// implementation of vector
+		public:
+			vector(/* args */)
+			{
+				std::cout << "vector constructor!" << std::endl;
+			};
+			~vector()
+			{
+				std::cout << "vector destructor!" << std::endl;
+			};
 	};
 }
-
-#include "vectorIterators.tpp"
-#include "vector.tpp"
-
-#endif
