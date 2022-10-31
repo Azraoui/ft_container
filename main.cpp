@@ -4,7 +4,6 @@
 int main(void)
 {
 	ft::vector<int> testMyVector;
-	std::vector<int> v;
 
 	return 0;
 }
