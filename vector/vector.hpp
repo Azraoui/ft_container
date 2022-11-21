@@ -124,6 +124,17 @@ namespace ft
 				_alloc.construct(_buffer + _size, value);
 				_size += 1;
 			}
+			void pop_back() {
+				if (empty())
+					return ;
+				_size -= 1;
+				_alloc.distroy(_buffer + _size);
+			};
+			void swap (vector& x) {
+				vector tmp(x);
+				x = tmp;
+				*this = x;
+			};
 			void clear() {
 				if (!_buffer)
 					return;
@@ -131,6 +142,17 @@ namespace ft
 					_alloc.destroy(&_buffer[i]);
 				this->_size = 0;
 			}
+			iterator insert (iterator position, const value_type& val) { // single element insert
+				
+				_size += 1;
+			};
+			void insert (iterator position, size_type n, const value_type& val) { // fill insert
+
+			};
+			template <class InputIterator>
+			void insert (iterator position, InputIterator first, InputIterator last) { // range insert
+
+			};
 
 			// Allocator:
 

@@ -22,18 +22,10 @@ int main()
     cout << v1.max_size() << endl;
     // v1.reserve(4611686018427387903);
     // throw length_error("'n' exceeds maximum supported size");
-    v2.assign(v1.end(), v1.begin());
+    // v2.assign(v1.end(), v1.begin());
     allocator<int> alloc;
 
-    try
-    {
-        int *v = alloc.allocate(4611686018427387903);
-
-    }
-    catch (std::exception &e)
-    {
-        throw std::bad_alloc();
-    }
+    vector<string> t;
     // if (std::distance(v1.end(), v1.begin()) < 0)
 	// 	throw std::length_error("negative distance");
     // cout << v1[0] << endl;
