@@ -2,6 +2,7 @@
 
 #include <memory> // refernce to allocator
 #include <iostream>
+#include <algorithm>
 #include "./iterator_traits.hpp"
 #include "./random_access_iterator.hpp"
 
@@ -74,13 +75,61 @@ namespace ft
 			}
 
 			// Modifiers:
-			void push_back(const reference value) {
-
+			template <class InputIterator>
+			void assign (InputIterator first, InputIterator last) { // Range version
+				size_type dist = static_cast<size_type>(std::distance(first, last));
+				if (dist < 0)
+					throw std::length_error("negative distance");
+				if (dist > _capacity)
+					reserve(dist);
+				else
+					clear();
+				size_type i = 0;
+				for (; i < dist; i++)
+					_alloc.construct(_buffer + i, *(first + i));
+				_size = i;
+			};
+			void assign (size_type n, const value_type& val) { // Fill version
+				if (n > _capacity)
+					reserve(n);
+				else
+					clear();
+				size_type i = 0;
+				for (; i < n; i++)
+					_alloc.construct(_buffer + i, val);
+				_size = i;
+			};
+			size_type max_size() const {
+				return std::min<size_type>(std::numeric_limits<diffrence_type>::max(), _alloc.max_size());
+			};
+			void reserve (size_type n) {
+				if (n <= _capacity)
+					return ;
+				if (n > max_size())
+					throw std::length_error("allocator<T>::allocate(size_t n) 'n' exceeds maximum supported size");
+				pointer tmp_buffer = NULL;
+				tmp_buffer = _alloc.allocate(n);
+				size_type i = 0;
+				for (; i < _size; i++)
+					_alloc.construct(&tmp_buffer[i], _buffer[i]);
+				_buffer.clear();
+				_alloc.deallocate(&_buffer, &_capacity)
+				_buffer = tmp_buffer;
+				_size = i;
+				_capacity = n;
+			};
+			void push_back(const_reference value) {
+				if (!_capacity || _capacity == _size)
+					reserve(_capacity > 0 ? (_capacity * 2) : 1);
+				_alloc.construct(_buffer + _size, value);
+				_size += 1;
 			}
-			void clear(){
+			void clear() {
+				if (!_buffer)
+					return;
+				for (size_type i = 0; i < _size; i++)
+					_alloc.destroy(&_buffer[i]);
 				this->_size = 0;
-				this->_capacity = 0;
-				this->_buffer = NULL;
 			}
 
 			// Allocator:
@@ -90,10 +139,25 @@ namespace ft
 				this->_size = 0;
 				this->_capacity = 0;
 				this->_buffer = NULL;
+				this->_alloc(alloc);
 			}
 			explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) { // fill constructor
-
+				this->_size = 0;
+				this->_capacity = 0;
+				this->_buffer = NULL;
+				this->_alloc(alloc);
+				// need insert here
 			}
+			template <class InputIterator>
+			vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) { // range constructor
+				this->_size = 0;
+				this->_capacity = 0;
+				this->_buffer = NULL;
+				this->_alloc(alloc);
+			};
+			vector (const vector& x) { // copy constructor
+				*this = x;
+			};
 			~vector() {
 				delete [] _buffer;
 			};
