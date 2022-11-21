@@ -91,6 +91,9 @@ namespace ft
 				this->_capacity = 0;
 				this->_buffer = NULL;
 			}
+			explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) { // fill constructor
+
+			}
 			~vector() {
 				delete [] _buffer;
 			};
