@@ -36,3 +36,4 @@ learn.cpp
 exe.dSYM
 test.cpp
 exe
+.DS_Store
