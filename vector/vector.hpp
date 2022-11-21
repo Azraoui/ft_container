@@ -10,9 +10,6 @@ namespace ft
 	template < class T, class Alloc = std::allocator< T > >
 	class vector
 	{
-		private:
-			/* data */
-
 		public:
 			typedef 			T												value_type;
 			typedef 			Alloc											allocator_type;
@@ -24,15 +21,78 @@ namespace ft
 			typedef typename	ft::Iterator_traits<iterator>::difference_type	difference_type;
 			typedef 			size_t											size_type;
 
-		// implementation of vector
+		private:
+			size_type		_size;
+			size_type		_capacity;
+			pointer			_buffer;
+			allocator_type	_alloc;
+
+		// Member functions
 		public:
-			vector(/* args */)
-			{
-				std::cout << "vector constructor!" << std::endl;
+			// Iterators:
+			iterator	begin() {
+				return	iterator(_buffer);
 			};
-			~vector()
-			{
-				std::cout << "vector destructor!" << std::endl;
+			iterator	end() {
+				return iterator(_buffer + _size);
+			};
+
+			// Capacity:
+			size_type	capacity() const{
+				return this->_capacity;
+			};
+			size_type	size() const{
+				return this->_size;
+			};
+			bool	empty() const{
+				if (!_size)
+					return true;
+				return false;
+			};
+
+			// Element access:
+			vector & operator = (const vector & v) {
+				delete [] _buffer;
+				_size = v.size();
+				_capacity = v.capacity();
+				_buffer = new value_type[_size];
+				for (size_type i = 0; i < _size; i++)
+					_buffer[i] = v[i];
+				return *this;
+			}
+			reference operator[] (size_type n){
+				return this->_buffer[n];
+			}
+			const_reference operator[] (size_type n) const{
+				return this->_buffer[n];
+			}
+			reference front() {
+				return buffer[0];
+			}
+			reference back() {
+				return buffer[_size - 1];
+			}
+
+			// Modifiers:
+			void push_back(const reference value) {
+
+			}
+			void clear(){
+				this->_size = 0;
+				this->_capacity = 0;
+				this->_buffer = NULL;
+			}
+
+			// Allocator:
+
+		// ------------------------------------------
+			explicit vector (const allocator_type& alloc = allocator_type()) { // default constructor
+				this->_size = 0;
+				this->_capacity = 0;
+				this->_buffer = NULL;
+			}
+			~vector() {
+				delete [] _buffer;
 			};
 	};
 }
