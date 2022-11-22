@@ -8,15 +8,14 @@ int main ()
   std::vector<int>::iterator it;
 
   it = myvector.begin();
-  it = myvector.insert ( it , 200 );
+  it = myvector.insert ( it - 10 , 200 );
+  // std::cout << it.base() << std::endl;
+  // myvector.insert (it - 5,2,300);
 
-  std::cout << it.base() << std::endl;
-  myvector.insert (it,2,300);
-
-  std::cout << it.base() << std::endl;
+  // std::cout << it.base() << std::endl;
 //   // "it" no longer valid, get a new one:
-  it = myvector.begin();
-  std::cout << it.base() << std::endl;
+  // it = myvector.begin();
+  // std::cout << it.base() << std::endl;
 
 //   std::vector<int> anothervector (2,400);
 //   myvector.insert (it+2,anothervector.begin(),anothervector.end());

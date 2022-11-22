@@ -23,7 +23,6 @@ int main()
     // v1.reserve(4611686018427387903);
     // throw length_error("'n' exceeds maximum supported size");
     // v2.assign(v1.end(), v1.begin());
-    allocator<int> alloc;
 
     vector<string> t;
     // if (std::distance(v1.end(), v1.begin()) < 0)

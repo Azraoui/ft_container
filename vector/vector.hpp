@@ -143,8 +143,18 @@ namespace ft
 				this->_size = 0;
 			}
 			iterator insert (iterator position, const value_type& val) { // single element insert
-				
+				size_type pos = static_cast<size_type>(std::distance(position, begin()));
+				if (!_capacity || _capacity == _size)
+					reserve(_capacity > 0 ? (_capacity * 2) : 1);
 				_size += 1;
+				value_type tmpValue;
+				for (size_type i = pos; i < _size ; i++)
+				{
+					tmpValue = _buffer + i;
+					_alloc.construct(_buffer + i, val);
+					val = tmpValue;
+				}
+				return (iterator(_buffer + pos));
 			};
 			void insert (iterator position, size_type n, const value_type& val) { // fill insert
 
