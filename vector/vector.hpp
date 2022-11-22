@@ -68,10 +68,10 @@ namespace ft
 				return this->_buffer[n];
 			}
 			reference front() {
-				return buffer[0];
+				return _buffer[0];
 			}
 			reference back() {
-				return buffer[_size - 1];
+				return _buffer[_size - 1];
 			}
 
 			// Modifiers:
@@ -143,7 +143,9 @@ namespace ft
 				this->_size = 0;
 			}
 			iterator insert (iterator position, const value_type& val) { // single element insert
-				size_type pos = static_cast<size_type>(std::distance(position, begin()));
+				size_type pos = static_cast<size_type>(std::distance(begin(), position));
+				if (pos < 0)
+					return position;
 				if (!_capacity || _capacity == _size)
 					reserve(_capacity > 0 ? (_capacity * 2) : 1);
 				_size += 1;
@@ -157,13 +159,68 @@ namespace ft
 				return (iterator(_buffer + pos));
 			};
 			void insert (iterator position, size_type n, const value_type& val) { // fill insert
-
+				size_type pos = static_cast<size_type>(std::distance(begin(), position));
+				if (pos < 0)
+					return ;
+				reserve(n + _capacity);
+				pointer _tmpBuffer = _alloc.allocat(_size - pos);
+				for (size_type i = 0; i < (_size - pos); i++)
+					_alloc.construct(&_tmpBuffer[i], _buffer[pos + i]);
+				for (size_type i = pos; i < pos + n; i++)
+				{
+					_alloc.destroy(&_buffer[i]);
+					_alloc.construct(&_buffer[i], val);
+				}
+				_size += n;
+				for (size_type i = pos + n; i < _size; i++)
+				{
+					_alloc.destroy(&_buffer[i]);
+					_alloc.construct(&_buffer[i], _tmpBuffer[i - n]);
+					_alloc.destroy(&_tmpBuffer[i - n]);
+				}
+				_alloc.deallocate(_tmpBuffer, _size - n - pos);
 			};
 			template <class InputIterator>
 			void insert (iterator position, InputIterator first, InputIterator last) { // range insert
-
+				size_type pos = static_cast<size_type>(std::distance(begin(), position));
+				if (pos < 0)
+					return;
+				size_type dist = static_cast<size_type>(std::distance(first, last));
+				if (dist < 0)
+					return;
+				reserve(dist + _capacity);
+				pointer _tmpBuffer = _alloc.allocat(_size - pos);
+				for (size_type i = 0; i < (_size - pos); i++)
+					_alloc.construct(&_tmpBuffer[i], _buffer[pos + i]);
+				for (size_type i = pos; i < pos + dist; i++)
+				{
+					_alloc.destroy(&_buffer[i]);
+					_alloc.construct(&_buffer[i], first[i - pos]);
+				}
+				_size += dist;
+				for (size_type i = pos + dist; i < _size; i++)
+				{
+					_alloc.destroy(&_buffer[i]);
+					_alloc.construct(&_buffer[i], _tmpBuffer[i - dist]);
+					_alloc.destroy(&_tmpBuffer[i - dist]);
+				}
+				_alloc.deallocate(_tmpBuffer, _size - dist - pos);
 			};
 
+			iterator erase (iterator position) {
+				size_type pos = static_cast<size_type>(std::distance(begin(), position));
+				value_type tmp;
+
+				_alloc.destroy(&_buffer[pos]);
+				_size -= 1;
+				for (size_type i = pos; i < _size; i++)
+				{
+					_buffer[i] = _buffer[i + 1];
+				}
+			};
+			iterator erase (iterator first, iterator last) {
+				
+			};
 			// Allocator:
 
 		// ------------------------------------------
