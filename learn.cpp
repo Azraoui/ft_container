@@ -25,6 +25,7 @@ int main()
     // v2.assign(v1.end(), v1.begin());
 
     vector<string> t;
+    vector<string> t2;
     // cout << t.begin().base() << endl;
     t.push_back("kdjfkdjf");
     t.push_back("kdjfkdjf");
@@ -32,12 +33,15 @@ int main()
     t.push_back("kdjfkdjf");
     t.push_back("kdjfkdjf");
     t.push_back("kdjfkdjf");
-    cout << t.size() << endl;
-    cout << t.capacity() << endl;
-    t.erase(t.end() + 10, t.begin());
+    t = t2;
     cout << "----------------------------" << endl;
     cout << t.size() << endl;
     cout << t.capacity() << endl;
+    t.erase(t.end(), t.begin());
+    cout << "----------------------------" << endl;
+    cout << t.size() << endl;
+    cout << t.capacity() << endl;
+    t.max_size();
 
     // cout << t.begin().base() << endl;
 

@@ -28,6 +28,12 @@ namespace ft
 			 * @brief Default Constructor
 			 * A a;
 			 */
+			Random_access_iterator() {
+			};
+			/**
+			 * @brief Paramater Constructor
+			 * 
+			 */
 			Random_access_iterator(pointer p) : __base(p){
 			};
 			/**

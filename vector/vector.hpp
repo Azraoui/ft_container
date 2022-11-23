@@ -50,15 +50,13 @@ namespace ft
 					return true;
 				return false;
 			};
+			size_type max_size() const {
+				return std::min<size_type>(std::numeric_limits<difference_type>::max(), _alloc.max_size());
+			};
 
 			// Element access:
 			vector & operator = (const vector & v) {
-				delete [] _buffer;
-				_size = v.size();
-				_capacity = v.capacity();
-				_buffer = new value_type[_size];
-				for (size_type i = 0; i < _size; i++)
-					_buffer[i] = v[i];
+				assign(v.begin(), v.end());
 				return *this;
 			}
 			reference operator[] (size_type n){
@@ -99,9 +97,6 @@ namespace ft
 					_alloc.construct(_buffer + i, val);
 				_size = i;
 			};
-			size_type max_size() const {
-				return std::min<size_type>(std::numeric_limits<diffrence_type>::max(), _alloc.max_size());
-			};
 			void reserve (size_type n) {
 				if (n <= _capacity)
 					return ;
@@ -113,7 +108,7 @@ namespace ft
 				for (; i < _size; i++)
 					_alloc.construct(&tmp_buffer[i], _buffer[i]);
 				_buffer.clear();
-				_alloc.deallocate(&_buffer, &_capacity)
+				_alloc.deallocate(&_buffer, &_capacity);
 				_buffer = tmp_buffer;
 				_size = i;
 				_capacity = n;
@@ -220,18 +215,30 @@ namespace ft
 				return (iterator(_buffer + pos));
 			};
 			iterator erase (iterator first, iterator last) {
+				size_type pos = static_cast<size_type>(std::distance(begin(), first));
 				size_type dist = static_cast<size_type>(std::distance(first, last));
-				if (dist < 0)
-					
+				for (size_type i = pos; i < dist + pos; i++)
+					_alloc.destroy(&_buffer[i]);
+				_size -= dist;
+				for (size_type i = pos; i < _size; i++)
+				{
+					_alloc.construct(&_buffer[i], _buffer[i + 1 + dist]);
+					_alloc.destroy(&_buffer[i + 1 + dist]);
+				}
+				return (iterator(_buffer + pos));
 			};
+
 			// Allocator:
+			allocator_type get_allocator() const {
+				return _alloc;
+			};
 
 		// ------------------------------------------
 			explicit vector (const allocator_type& alloc = allocator_type()) { // default constructor
 				this->_size = 0;
 				this->_capacity = 0;
 				this->_buffer = NULL;
-				this->_alloc(alloc);
+				this->_alloc = alloc;
 			}
 			explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) { // fill constructor
 				this->_size = 0;
@@ -239,6 +246,7 @@ namespace ft
 				this->_buffer = NULL;
 				this->_alloc(alloc);
 				// need insert here
+				insert(begin(), n, val);
 			}
 			template <class InputIterator>
 			vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) { // range constructor
@@ -246,12 +254,29 @@ namespace ft
 				this->_capacity = 0;
 				this->_buffer = NULL;
 				this->_alloc(alloc);
+				size_type dist = static_cast<size_type>(std::distance(first, last));
+				if (dist < 0)
+					throw std::length_error("negative distance");
+				insert(begin(), first, last);
 			};
-			vector (const vector& x) { // copy constructor
+			vector (const vector& x) : _size(0), _capacity(0), _buffer(NULL){ // copy constructor
 				*this = x;
 			};
 			~vector() {
-				delete [] _buffer;
+				clear();
+				if (_buffer != NULL && _capacity != 0)
+					_alloc.deallocate(_buffer, _capacity);
+				_buffer = NULL;
 			};
-	};
+	}; // end of class;
+
+	// Non-member function overloads
+
+		// template <class T, class Alloc>
+		// void swap (vector<T,Alloc>& x, vector<T,Alloc>& y) {
+			
+		// };
+
+	// relational operators (vector)
+
 }
