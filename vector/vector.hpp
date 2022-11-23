@@ -209,17 +209,20 @@ namespace ft
 
 			iterator erase (iterator position) {
 				size_type pos = static_cast<size_type>(std::distance(begin(), position));
-				value_type tmp;
 
 				_alloc.destroy(&_buffer[pos]);
 				_size -= 1;
 				for (size_type i = pos; i < _size; i++)
 				{
-					_buffer[i] = _buffer[i + 1];
+					_alloc.construct(&_buffer[i], _buffer[i + 1]);
+					_alloc.destroy(&_buffer[i + 1]);
 				}
+				return (iterator(_buffer + pos));
 			};
 			iterator erase (iterator first, iterator last) {
-				
+				size_type dist = static_cast<size_type>(std::distance(first, last));
+				if (dist < 0)
+					
 			};
 			// Allocator:
 

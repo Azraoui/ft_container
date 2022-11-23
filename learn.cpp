@@ -34,11 +34,7 @@ int main()
     t.push_back("kdjfkdjf");
     cout << t.size() << endl;
     cout << t.capacity() << endl;
-    t.erase(t.begin());
-    t.erase(t.begin());
-    t.erase(t.begin());
-    t.erase(t.begin());
-    t.erase(t.begin());
+    t.erase(t.end() + 10, t.begin());
     cout << "----------------------------" << endl;
     cout << t.size() << endl;
     cout << t.capacity() << endl;
