@@ -272,10 +272,10 @@ namespace ft
 
 	// Non-member function overloads
 
-		// template <class T, class Alloc>
-		// void swap (vector<T,Alloc>& x, vector<T,Alloc>& y) {
+		template <class T, class Alloc>
+		void swap (vector<T,Alloc>& x, vector<T,Alloc>& y) {
 			
-		// };
+		};
 
 	// relational operators (vector)
 
