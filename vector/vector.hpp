@@ -280,22 +280,26 @@ namespace ft
 	// relational operators (vector)
 	template <class T, class Alloc>
 	bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
-		return (lhs >= rhs);
+		return !(lhs < rhs);
 	};
 	template <class T, class Alloc>
 	bool operator> (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
-		return (lhs > rhs);
+		return (rhs < lhs);
 	};
 	template <class T, class Alloc>
 	bool operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
-		return (lhs <= rhs);
+		return !(rhs < lhs);
 	};
 	template <class T, class Alloc>
 	bool operator<  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
-		return (lhs < rhs);
+		// return (lhs < rhs);
 	};
 	template <class T, class Alloc>
 	bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
-		return (lhs != rhs);
+		return !(lhs == rhs);
+	};
+	template <class T, class Alloc>
+	bool operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
+		// return
 	};
 }
