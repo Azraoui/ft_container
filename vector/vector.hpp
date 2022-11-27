@@ -5,6 +5,7 @@
 #include <algorithm>
 #include "./iterator_traits.hpp"
 #include "./random_access_iterator.hpp"
+#include "./utils.hpp"
 
 namespace ft
 {
@@ -292,7 +293,7 @@ namespace ft
 	};
 	template <class T, class Alloc>
 	bool operator<  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
-		// return (lhs < rhs);
+		return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 	};
 	template <class T, class Alloc>
 	bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
@@ -300,6 +301,6 @@ namespace ft
 	};
 	template <class T, class Alloc>
 	bool operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
-		// return
+		return ( ft::equal(lhs.begin(), lhs.end(), rhs.begin()) && (lhs.size() == rhs.size()));
 	};
 }
