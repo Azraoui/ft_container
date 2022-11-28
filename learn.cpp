@@ -44,7 +44,13 @@ int main()
     cout << t.size() << endl;
     cout << t.capacity() << endl;
     t.max_size();
-    map<int, string>::reverse_iterator it;
+    map<char*, string>::iterator it;
+    map<char*, string> map;
+    it = map.begin();
+    char *s = "a";
+    map.insert(make_pair(s, "abdellah"));
+    cout << map[s] << std::endl;
+    cout << *it->first << std::endl;
     // cout << t.begin().base() << endl;
 
     // vector<string>::iterator it;
