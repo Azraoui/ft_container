@@ -1,6 +1,8 @@
 #include <iostream>
 #include <memory>
 #include <vector>
+#include <map>
+#include <stack>
 
 using namespace std;
 
@@ -42,7 +44,7 @@ int main()
     cout << t.size() << endl;
     cout << t.capacity() << endl;
     t.max_size();
-
+    map<int, string>::reverse_iterator it;
     // cout << t.begin().base() << endl;
 
     // vector<string>::iterator it;
