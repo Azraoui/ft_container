@@ -4,13 +4,10 @@
 
 namespace ft
 {
-	class map 
+	template <typename key, typename value, typename Compare = std::less<key>,
+	typename Alloc = std::allocator<std::pair<const key, value> > >
+	class map
 	{
-		private:
-			
-
-		public:
-			map() {};
-			~map() {};
+		
 	};
 }
