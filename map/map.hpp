@@ -1,6 +1,7 @@
 #pragma once
 
 #include "./utils/utils.hpp"
+#include "./srcs/avl.hpp"
 
 namespace ft
 {

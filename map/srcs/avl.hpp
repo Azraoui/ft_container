@@ -41,6 +41,30 @@ namespace ft
 					return 0;
 				return (getHeight(node->left) - getHeight(node->right));
 			}
+			Node*	rightRotate(Node* n)
+			{
+				Node *x = n->left;
+				Node *y = x->right;
+
+				x->right = n;
+				n->left = y;
+
+				n->height = 1 + std::max(getHeight(n->left), getHeight(n->right));
+				x->height = 1 + std::max(getHeight(x->left), getHeight(x->right));
+				return x;
+			}
+			Node*	leftRotate(Node* n)
+			{
+				Node *y = n->right;
+				Node *x = y->left;
+
+				y->left = n;
+				n->right = x;
+
+				n->height = 1 + std::max(getHeight(n->left), getHeight(n->right));
+				y->height = 1 + std::max(getHeight(y->left), getHeight(y->right));
+				return y;
+			}
 			Node*	insert(Node *node, int key)
 			{
 				if (node == NULL)
@@ -55,29 +79,18 @@ namespace ft
 				int balance = getBalance(node);
 
 				if (balance > 1 && key < node->left->key) // left left case
+					return rightRotate(node);
+				if (balance < -1 && key > node->right->key) // right right case
+					return leftRotate(node);
+				if (balance > 1 && key > node->left->key) // left right case
 				{
-					Node *x = node->left;
-					Node *y = x->right;
-
-
-					x->right = node;
-					node->left = y;
-
-					node->height = 1 + std::max(getHeight(node->left), getHeight(node->right));
-					x->height = 1 + std::max(getHeight(x->left), getHeight(x->right));
-					return x;
+					node->left = leftRotate(node->left);
+					return rightRotate(node);
 				}
-				if (balance < -1 && key > node->right->key)
+				if (balance < -1 && key < node->right->key) // right left case
 				{
-					Node *y = node->right;
-					Node *x = y->left;
-
-					y->left = node;
-					node->right = x;
-
-					node->height = 1 + std::max(getHeight(node->left), getHeight(node->right));
-					y->height = 1 + std::max(getHeight(y->left), getHeight(y->right));
-					return y;
+					node->right = rightRotate(node->right);
+					return leftRotate(node);
 				}
 
 				return node;
