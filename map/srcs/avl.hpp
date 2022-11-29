@@ -67,7 +67,7 @@ namespace ft
 					x->height = 1 + std::max(getHeight(x->left), getHeight(x->right));
 					return x;
 				}
-				if (balance < 1 && key > node->right->key)
+				if (balance < -1 && key > node->right->key)
 				{
 					Node *y = node->right;
 					Node *x = y->left;
