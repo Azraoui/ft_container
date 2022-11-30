@@ -23,8 +23,21 @@ namespace ft
 	class Avl
 	{
 		public:
-			typedef typename T::first_type	keyType;
-			typedef typename T::second_type	valueType;
+			// member type
+			typedef typename T::first_type					keyType;
+			typedef typename T::second_type					valueType;
+
+			private:
+				typename	Alloc::template	rebind< Node >::other	_nodeAllocator;
+
+			// constructer && destructer
+			Avl() {};
+			~Avl() {};
+
+			// member function
+			Node*	insert(Node* node, T data) {
+				
+			};
 	};
 
 }
