@@ -26,17 +26,29 @@ namespace ft
 			// member type
 			typedef typename T::first_type					keyType;
 			typedef typename T::second_type					valueType;
+			typedef 		 size_t 						size_type;
 
 			private:
 				typename	Alloc::template	rebind< Node >::other	_nodeAllocator;
+				size_type											_size;
+				Alloc												_allocator;
 
 			// constructer && destructer
-			Avl() {};
+			Avl() : _size(0) {};
 			~Avl() {};
 
 			// member function
+			Node*	new_node(T data) {
+				Node *newNode = _nodeAllocator.allocate(1);
+				_nodeAllocator.construct(newNode, data);
+				return (newNode);
+			};
 			Node*	insert(Node* node, T data) {
-				
+				if (node == NULL)
+				{
+					_size += 1;
+					return (newNode(data));
+				}
 			};
 	};
 
