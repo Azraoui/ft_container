@@ -28,12 +28,13 @@ namespace ft
 			typedef typename T::second_type					valueType;
 			typedef 		 size_t 						size_type;
 
-			private:
-				typename	Alloc::template	rebind< Node >::other	_nodeAllocator;
-				size_type											_size;
-				Alloc												_allocator;
-				Compare												_compare;
+		private:
+			typename	Alloc::template	rebind< Node >::other	_nodeAllocator;
+			size_type											_size;
+			Alloc												_allocator;
+			Compare												_compare;
 
+		public:
 			// constructer && destructer
 			Avl() : _size(0) {};
 			~Avl() {};
@@ -45,20 +46,17 @@ namespace ft
 				_nodeAllocator.construct(newNode, data);
 				return (newNode);
 			};
-			int		getHeight(Node *node, Node *n2 = NULL) // return max height or height
+			int		get_height(Node *node)
 			{
-				int n2Height = 0;
 				if (node == NULL)
-					reutrn (0);
-				if (n2 != NULL)
-					n2Height = n2->height;
-				return (std::max(node->height, n2Height));
+					return (0);
+				return (node->height);
 			}
 			int		getBF(Node *node) // get balance factory
 			{
 				if (node == NULL)
 					return (0);
-				return (getHeight(node->left) - getHeight(node->right));
+				return (get_height(node->left) - get_height(node->right));
 			}
 			Node*	leftRotate(Node* node)
 			{
@@ -68,8 +66,8 @@ namespace ft
 				rightNode->left = node;
 				node->right = tmp;
 
-				node->height = 1 + getHeight(node->left, node->right);
-				rightNode->height = 1 + getHeight(rightNode->left, rightNode->right);
+				node->height = 1 + std::max(get_height(node->left), get_height(node->right));
+				rightNode->height = 1 + std::max(get_height(rightNode->left), get_height(rightNode->right));
 
 				return (rightNode);
 			}
@@ -81,8 +79,8 @@ namespace ft
 				leftNode->right = node;
 				node->left = tmp;
 
-				node->height = 1 + getHeight(node->left, node->right);
-				leftNode->height = 1 + getHeight(leftNode->left, leftNode->right);
+				node->height = 1 + std::max(get_height(node->left), get_height(node->right));
+				leftNode->height = 1 + std::max(get_height(leftNode->left), get_height(leftNode->right));
 
 				return (leftNode);
 			}
@@ -92,7 +90,7 @@ namespace ft
 				if (node == NULL)
 				{
 					_size += 1;
-					return (newNode(data));
+					return (new_node(data));
 				}
 				if (_compare(data.first, node->data.first))
 					node->left = insert(node->left, data);
@@ -102,7 +100,7 @@ namespace ft
 					return node; // If the key is entered
 
 				// update height
-				node->height = 1 + getHeight(node->left, node->right);
+				node->height = 1 + (std::max(get_height(node->left), get_height(node->right)));
 
 				// get balance factory
 				int	balanceFactory = getBF(node);
@@ -127,7 +125,7 @@ namespace ft
 					node->right = (rightRotate(node->right));
 					return (leftRotate(node));
 				}
-				return (node) // if no change happen;
+				return (node); // if no change happen;
 			};
 	};
 

@@ -33,12 +33,21 @@ namespace ft
 
 		public:
 			// constructor && destructor
-			map() {};
+			map(): _root(NULL) {};
 			~map() {};
 			void	insert(void)
 			{
-				_avlTree.insert(_root, ft::make_pair(1, "abdellah el azraoui"));
+					_root = _avlTree.insert(_root, ft::make_pair(9, 1337));
+					_root = _avlTree.insert(_root, ft::make_pair(5, 1337));
+					_root = _avlTree.insert(_root, ft::make_pair(10, 1337));
+					_root = _avlTree.insert(_root, ft::make_pair(0, 1337));
+					_root = _avlTree.insert(_root, ft::make_pair(6, 1337));
+					_root = _avlTree.insert(_root, ft::make_pair(11, 1337));
+					_root = _avlTree.insert(_root, ft::make_pair(-1, 1337));
+					_root = _avlTree.insert(_root, ft::make_pair(1, 1337));
+					_root = _avlTree.insert(_root, ft::make_pair(2, 1337));
+				
+				std::cout << _avlTree.get_height(_root) << std::endl;
 			}
-
 	};
 }

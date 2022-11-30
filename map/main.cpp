@@ -2,6 +2,7 @@
 
 int main()
 {
-	ft::map<int, std::string> m;
+	ft::map<int, int> m;
+	m.insert();
 	return 0;
 }
