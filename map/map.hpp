@@ -28,12 +28,16 @@ namespace ft
 			typedef	ft::Avl<value_type, _nodeType, allocator_type, key_compare>	_avlType;
 			
 			// private variable
+			_nodeType*	_root;
 			_avlType	_avlTree;
 
 		public:
+			// constructor && destructor
+			map() {};
+			~map() {};
 			void	insert(void)
 			{
-				
+				_avlTree.insert(_root, ft::make_pair(1, "abdellah el azraoui"));
 			}
 
 	};
