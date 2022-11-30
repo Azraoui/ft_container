@@ -2,6 +2,7 @@
 
 #include "./utils/utils.hpp"
 #include "./srcs/avl.hpp"
+#include "./iterators/iterator.hpp"
 
 namespace ft
 {
@@ -31,6 +32,7 @@ namespace ft
 			
 			// private variable
 			allocator_type	_alloc;
+			key_compare		_key_compare;
 			_nodeType*		_root;
 			_avlType		_avlTree;
 
@@ -58,6 +60,10 @@ namespace ft
 					std::cout << "may not empty" << std::endl;
 				std::cout << "max_size = " << max_size() << std::endl;
 			}
+			pair<iterator,bool> insert (const value_type& val) { // single element (1)
+
+			};
+
 			// capacity
 			bool empty() const {
 				return (!size());
@@ -67,6 +73,19 @@ namespace ft
 			};
 			size_type max_size() const {
 				return (std::min<size_type>(_alloc.max_size(), std::numeric_limits<difference_type >::max()));
+			};
+
+			// Observers
+			key_compare key_comp() const {
+				return _key_compare;
+			};
+			// value_compare value_comp() const {
+			// 	return value_compare;
+			// };
+
+			// allocator
+			allocator_type get_allocator() const {
+				return _alloc;
 			};
 	};
 }
