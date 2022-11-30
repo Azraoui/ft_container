@@ -20,16 +20,19 @@ namespace ft
 			typedef	typename	allocator_type::const_reference				const_reference;
 			typedef	typename	allocator_type::pointer						pointer;
 			typedef	typename	allocator_type::const_pointer				const_pointer;
+			typedef				size_t										size_type;
+			typedef				ptrdiff_t									difference_type; // ned to change it iterator_trait
 			// typedef	typename												iterator;
-		
+
 		private:
 			// private member types
 			typedef	ft::Node< value_type >										_nodeType;
 			typedef	ft::Avl<value_type, _nodeType, allocator_type, key_compare>	_avlType;
 			
 			// private variable
-			_nodeType*	_root;
-			_avlType	_avlTree;
+			allocator_type	_alloc;
+			_nodeType*		_root;
+			_avlType		_avlTree;
 
 		public:
 			// constructor && destructor
@@ -48,6 +51,22 @@ namespace ft
 					_root = _avlTree.insert(_root, ft::make_pair(2, 1337));
 				
 				std::cout << _avlTree.get_height(_root) << std::endl;
+				std::cout << "size = " << size() << std::endl;
+				if (empty())
+					std::cout << "map empty" << std::endl;
+				else
+					std::cout << "may not empty" << std::endl;
+				std::cout << "max_size = " << max_size() << std::endl;
 			}
+			// capacity
+			bool empty() const {
+				return (!size());
+			};
+			size_type size() const {
+				return _avlTree.size();
+			};
+			size_type max_size() const {
+				return (std::min<size_type>(_alloc.max_size(), std::numeric_limits<difference_type >::max()));
+			};
 	};
 }

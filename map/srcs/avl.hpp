@@ -40,6 +40,7 @@ namespace ft
 			~Avl() {};
 
 			// member function
+			size_type	size() const {return this->_size;}
 			Node*	new_node(T data) // create new node
 			{
 				Node *newNode = _nodeAllocator.allocate(1);
