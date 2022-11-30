@@ -39,7 +39,8 @@ namespace ft
 			~Avl() {};
 
 			// member function
-			Node*	new_node(T data) {
+			Node*	new_node(T data) // create new node
+			{
 				Node *newNode = _nodeAllocator.allocate(1);
 				_nodeAllocator.construct(newNode, data);
 				return (newNode);

@@ -31,7 +31,10 @@ namespace ft
 			_avlType	_avlTree;
 
 		public:
-			
+			void	insert(void)
+			{
+				
+			}
 
 	};
 }

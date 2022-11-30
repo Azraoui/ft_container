@@ -2,6 +2,6 @@
 
 int main()
 {
-	ft::map<int, std::string> m;
+	// ft::map<int, std::string> m;
 	return 0;
 }
