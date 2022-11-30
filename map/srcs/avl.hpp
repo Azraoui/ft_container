@@ -23,8 +23,8 @@ namespace ft
 	class Avl
 	{
 		public:
-			typedef typename T::first_type	first_type;
-			typedef typename T::second_type	second_type;
+			typedef typename T::first_type	keyType;
+			typedef typename T::second_type	valueType;
 	};
 
 }
