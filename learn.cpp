@@ -49,6 +49,7 @@ int main()
     it = map.begin();
     char *s = "a";
     map.insert(make_pair(s, "abdellah"));
+    map.max_size();
     cout << map[s] << std::endl;
     cout << *it->first << std::endl;
     // cout << t.begin().base() << endl;

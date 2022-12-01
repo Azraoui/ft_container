@@ -14,6 +14,7 @@ namespace ft
 			Node	*right;
 			int		height;
 
+			Node() { this = NULL; };
 			Node(const T &data): data(data), left(NULL), right(NULL), height(1) {};
 			~Node() {};
 	};

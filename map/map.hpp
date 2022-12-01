@@ -38,7 +38,7 @@ namespace ft
 
 		public:
 			// constructor && destructor
-			map(): _root(NULL) {};
+			map(): _root(), _avlTree() {};
 			~map() {};
 			void	insert(void)
 			{
@@ -61,7 +61,7 @@ namespace ft
 				std::cout << "max_size = " << max_size() << std::endl;
 			}
 			pair<iterator,bool> insert (const value_type& val) { // single element (1)
-
+				
 			};
 
 			// capacity
