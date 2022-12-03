@@ -2,7 +2,7 @@
 
 namespace ft
 {
-	template <>
+	template <typename T, typename Node, typename Avl>
 	class iterator
 	{
 		private:

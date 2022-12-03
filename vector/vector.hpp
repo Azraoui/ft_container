@@ -117,10 +117,11 @@ namespace ft
 			void push_back(const_reference value) {
 				if (!_capacity || _capacity == _size)
 					reserve(_capacity > 0 ? (_capacity * 2) : 1);
-				_alloc.construct(_buffer + _size, value);
 				_size += 1;
+				_alloc.construct(_buffer + _size, value);
 			}
-			void pop_back() {
+			void pop_back()
+			{
 				if (empty())
 					return ;
 				_size -= 1;
