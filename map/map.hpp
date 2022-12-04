@@ -40,6 +40,16 @@ namespace ft
 			// constructor && destructor
 			map(): _root(), _avlTree() {};
 			~map() {};
+
+			// Iterators:
+			iterator begin() {
+				return iterator(_avlTree.min_value(_root));
+			};
+			iterator end() {
+				return iterator();
+			};
+
+			// Modifiers:
 			void	insert(void)
 			{
 					_root = _avlTree.insert(_root, ft::make_pair(9, 1337));

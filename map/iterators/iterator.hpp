@@ -15,17 +15,14 @@ namespace ft
 			typedef	std::bidirectional_iterator_tag	iterator_category;
 
 		private:
-			Avl		avl;
-			Node*	node;
+			Avl		_avl;
+			Node*	_node;
 
 		public:
 			// construct && destruct
-			iterator(/* args */) {
-
-			};
-			~iterator() {
-
-			};
+			iterator() : _avl(), _node(NULL){};
+			iterator(const Node* node) : _avl(), _node(node) {};
+			~iterator() {};
 			iterator	operator = (const iterator &x)
 			{
 				this->avl = x.avl;
@@ -33,6 +30,6 @@ namespace ft
 				return (*this);
 			}
 			// overload
-
+			
 	};
 }

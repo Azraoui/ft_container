@@ -129,6 +129,17 @@ namespace ft
 				}
 				return (node); // if no change happen;
 			};
+			Node*	min_value(Node* root)
+			{
+				if (root->left == NULL)
+					return (root);
+				return (min_value(root->left));
+			}
+			Node*	max_value(Node*	root)
+			{
+				if (root->right == NULL)
+					return (root);
+				return (max_value(root->right));
+			}
 	};
-
 }
