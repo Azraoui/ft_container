@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include "../srcs/avl.hpp"
 
 namespace ft
 {
@@ -19,15 +20,17 @@ namespace ft
 		public:
 			Avl		_avl;
 			Node*	_node;
+			Node*	_root;
 
 		public:
 			// construct && destruct
-			iterator() : _avl(), _node(NULL){};
-			iterator(const Node* node) : _avl(), _node(node) {};
+			iterator() : _avl(), _node(NULL){}, _root(NULL);
+			iterator(const Node* node, const Node* root) : _avl(), _node(node), _root(root) {};
 			~iterator() {};
 			iterator	operator = (const iterator &x)
 			{
-				this->node = x.node;
+				this->_node = x._node;
+				this->_root = x._root;
 				return (*this);
 			}
 
@@ -46,6 +49,9 @@ namespace ft
 			}
 			const_pointer operator -> () const {
 				return (this->_node->data);
+			}
+			iterator& operator ++ () {
+				// _node = _avl.next_node(_node, )
 			}
 	};
 }
