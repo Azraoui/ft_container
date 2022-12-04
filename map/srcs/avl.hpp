@@ -141,5 +141,32 @@ namespace ft
 					return (root);
 				return (max_value(root->right));
 			}
+			Node*	findParent(Node* root, keyType key)
+			{
+				Node*	parent = NULL;
+
+				while (true)
+				{
+					if (_compare(key, root->data.first))
+					{
+						root = root->left;
+						parent = root;
+					}
+					else if (_compare(root->data.first, key))
+					{
+						root = root->right;
+						parent = root;
+					}
+					else
+					{
+						return parent;
+					}
+				}
+				return (parent);
+			}
+			// Node*	next_node(Node* root, keyType key)
+			// {
+			// 	return (NULL);
+			// }
 	};
 }

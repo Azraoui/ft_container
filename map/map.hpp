@@ -12,29 +12,27 @@ namespace ft
 	{
 		// Member types
 		public:
-			typedef				key											key_type;
-			typedef				value										mapped_type;
-			typedef				ft::pair< const key_type, mapped_type >		value_type;
-			typedef				Compare										key_compare;
-			typedef				Alloc										allocator_type;
-			typedef	typename	allocator_type::reference					reference;
-			typedef	typename	allocator_type::const_reference				const_reference;
-			typedef	typename	allocator_type::pointer						pointer;
-			typedef	typename	allocator_type::const_pointer				const_pointer;
-			typedef				size_t										size_type;
-			typedef				ptrdiff_t									difference_type; // ned to change it iterator_trait
-			// typedef	typename												iterator;
+			typedef				key												key_type;
+			typedef				value											mapped_type;
+			typedef				ft::pair< const key_type, mapped_type >			value_type;
+			typedef				Compare											key_compare;
+			typedef				Alloc											allocator_type;
+			typedef	typename	allocator_type::reference						reference;
+			typedef	typename	allocator_type::const_reference					const_reference;
+			typedef	typename	allocator_type::pointer							pointer;
+			typedef	typename	allocator_type::const_pointer					const_pointer;
+			typedef				size_t											size_type;
+			typedef				ptrdiff_t										difference_type; // ned to change it iterator_trait
+			typedef				ft::Node< value_type >											_nodeType;
+			typedef				ft::Avl<value_type, _nodeType, allocator_type, key_compare>		_avlType;
+			typedef				iterator<value_type, _nodeType, _avlType>						iterator;
 
-		private:
-			// private member types
-			typedef	ft::Node< value_type >										_nodeType;
-			typedef	ft::Avl<value_type, _nodeType, allocator_type, key_compare>	_avlType;
-			
+		private:	
 			// private variable
 			allocator_type	_alloc;
 			key_compare		_key_compare;
 			_nodeType*		_root;
-			_avlType		_avlTree;
+			_avlType			_avlTree;
 
 		public:
 			// constructor && destructor
@@ -62,17 +60,21 @@ namespace ft
 					_root = _avlTree.insert(_root, ft::make_pair(1, 1337));
 					_root = _avlTree.insert(_root, ft::make_pair(2, 1337));
 				
-				std::cout << _avlTree.get_height(_root) << std::endl;
-				std::cout << "size = " << size() << std::endl;
-				if (empty())
-					std::cout << "map empty" << std::endl;
-				else
-					std::cout << "may not empty" << std::endl;
-				std::cout << "max_size = " << max_size() << std::endl;
+				// std::cout << _avlTree.get_height(_root) << std::endl;
+				// std::cout << "size = " << size() << std::endl;
+				// if (empty())
+				// 	std::cout << "map empty" << std::endl;
+				// else
+				// 	std::cout << "may not empty" << std::endl;
+				// std::cout << "max_size = " << max_size() << std::endl;
+
+				// ------------------------------------------
+
+				// _nodeType*	parent = _avlTree.findParent(_root, 2);
 			}
-			pair<iterator,bool> insert (const value_type& val) { // single element (1)
+			// pair<iterator,bool> insert (const value_type& val) { // single element (1)
 				
-			};
+			// };
 
 			// capacity
 			bool empty() const {
