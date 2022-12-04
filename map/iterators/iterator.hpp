@@ -24,7 +24,7 @@ namespace ft
 
 		public:
 			// construct && destruct
-			iterator() : _avl(), _node(NULL){}, _root(NULL);
+			iterator() : _avl(), _node(NULL), _root(NULL) {};
 			iterator(const Node* node, const Node* root) : _avl(), _node(node), _root(root) {};
 			~iterator() {};
 			iterator	operator = (const iterator &x)
@@ -51,7 +51,26 @@ namespace ft
 				return (this->_node->data);
 			}
 			iterator& operator ++ () {
-				// _node = _avl.next_node(_node, )
+				_node = _avl.next_node(_root, _node);
+				return (*this);
+			}
+			iterator operator ++ (int) {
+				
+				iterator _old = *this;
+				_node = _avl.next_node(_root, _node);
+				return _old;
+			}
+			iterator operator -- () {
+				if (_node == _avl.minNode(_root))
+					_node = _avl.maxNode(_root);
+				else
+					_node = _avl.previous_node(_root, _node);
+				return (*this);
+			}
+			iterator operator -- (int) {
+				iterator _old = *this;
+				operator--();
+				return _old;
 			}
 	};
 }
