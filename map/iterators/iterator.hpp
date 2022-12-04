@@ -14,7 +14,7 @@ namespace ft
 			typedef	ptrdiff_t						difference_type;
 			typedef	std::bidirectional_iterator_tag	iterator_category;
 
-		private:
+		public:
 			Avl		_avl;
 			Node*	_node;
 

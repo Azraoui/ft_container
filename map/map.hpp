@@ -41,7 +41,7 @@ namespace ft
 
 			// Iterators:
 			iterator begin() {
-				return iterator(_avlTree.min_value(_root));
+				return iterator(_avlTree.minNode(_root));
 			};
 			iterator end() {
 				return iterator();
@@ -70,7 +70,14 @@ namespace ft
 
 				// ------------------------------------------
 
-				// _nodeType*	parent = _avlTree.findParent(_root, 2);
+				// _nodeType*	parent = _avlTree.findParent(_root,9);
+				// std::cout << parent->data.first << std::endl;
+				_nodeType* node = _avlTree.maxNode(_root);
+				while (node != NULL)
+				{
+					std::cout << node->data.first << std::endl;
+					node = _avlTree.previous_node(_root, node);
+				}
 			}
 			// pair<iterator,bool> insert (const value_type& val) { // single element (1)
 				

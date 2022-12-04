@@ -129,17 +129,17 @@ namespace ft
 				}
 				return (node); // if no change happen;
 			};
-			Node*	min_value(Node* root)
+			Node*	minNode(Node* root)
 			{
 				if (root->left == NULL)
 					return (root);
-				return (min_value(root->left));
+				return (minNode(root->left));
 			}
-			Node*	max_value(Node*	root)
+			Node*	maxNode(Node*	root)
 			{
 				if (root->right == NULL)
 					return (root);
-				return (max_value(root->right));
+				return (maxNode(root->right));
 			}
 			Node*	findParent(Node* root, keyType key)
 			{
@@ -149,24 +149,50 @@ namespace ft
 				{
 					if (_compare(key, root->data.first))
 					{
-						root = root->left;
 						parent = root;
+						root = root->left;
 					}
 					else if (_compare(root->data.first, key))
 					{
-						root = root->right;
 						parent = root;
+						root = root->right;
 					}
 					else
-					{
 						return parent;
-					}
 				}
 				return (parent);
 			}
-			// Node*	next_node(Node* root, keyType key)
-			// {
-			// 	return (NULL);
-			// }
+			Node*	next_node(Node* root, Node* node)
+			{
+				Node* parent = findParent(root, node->data.first);
+				if (node->right != NULL)
+					return minNode(node->right);
+				else
+				{
+					while (parent != NULL)
+					{
+						if (_compare(node->data.first, parent->data.first))
+							break ;
+						parent = findParent(root, parent->data.first);
+					}
+					return parent;
+				}
+			}
+			Node*	previous_node(Node* root, Node* node)
+			{
+				Node* parent = findParent(root, node->data.first);
+				if (node->left != NULL)
+					return maxNode(node->left);
+				else
+				{
+					while (parent != NULL)
+					{
+						if (_compare(parent->data.first, node->data.first))
+							break ;
+						parent = findParent(root, parent->data.first);
+					}
+					return parent;
+				}
+			}
 	};
 }
