@@ -47,6 +47,7 @@ int main()
     map<char*, string>::iterator it;
     map<char*, string> map;
     it = map.begin();
+    vector<string>::iterator tt;
     char *s = "a";
     map.insert(make_pair(s, "abdellah"));
     map.max_size();
