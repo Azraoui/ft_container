@@ -32,7 +32,7 @@ namespace ft
 			allocator_type	_alloc;
 			key_compare		_key_compare;
 			_nodeType*		_root;
-			_avlType			_avlTree;
+			_avlType		_avlTree;
 
 		public:
 			// constructor && destructor
@@ -41,10 +41,10 @@ namespace ft
 
 			// Iterators:
 			iterator begin() {
-				return iterator(_avlTree.minNode(_root));
+				return iterator(_avlTree.minNode(_root), _root);
 			};
 			iterator end() {
-				return iterator();
+				return iterator(NULL, _root);
 			};
 
 			// Modifiers:
@@ -72,12 +72,13 @@ namespace ft
 
 				// _nodeType*	parent = _avlTree.findParent(_root,9);
 				// std::cout << parent->data.first << std::endl;
-				_nodeType* node = _avlTree.maxNode(_root);
-				while (node != NULL)
-				{
-					std::cout << node->data.first << std::endl;
-					node = _avlTree.previous_node(_root, node);
-				}
+				// _nodeType* node = _avlTree.maxNode(_root);
+				// while (node != NULL)
+				// {
+				// 	std::cout << node->data.first << std::endl;
+				// 	node = _avlTree.previous_node(_root, node);
+				// }
+				iterator it = begin();
 			}
 			// pair<iterator,bool> insert (const value_type& val) { // single element (1)
 				
