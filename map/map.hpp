@@ -126,6 +126,15 @@ namespace ft
 				for (; first != last; first++)
 					insert(*first);
 			};
+			void erase (iterator position) { // (1)
+				
+			};
+			size_type erase (const key_type& k) { // (2)
+
+			};
+			void erase (iterator first, iterator last) { // (3)
+
+			};
 
 			// capacity
 			bool empty() const {

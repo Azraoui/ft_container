@@ -86,7 +86,7 @@ namespace ft
 
 				return (leftNode);
 			}
-			Node*	insert(Node* node, T data) {
+			Node*	insert(Node* root, T data) {
 
 				// BST
 				if (node == NULL)
@@ -192,6 +192,44 @@ namespace ft
 						parent = findParent(root, parent->data.first);
 					}
 					return parent;
+				}
+			}
+			Node*	delete_node(Node* root, keyType key)
+			{
+				if (root == NULL)
+					return (NULL);
+				if (_compare(root->data.first, key))
+					root->right = delete_node(root->right, key);
+				else if (_compare(key, root->data.first))
+					root->left = delete_node(root->left, key);
+				else
+				{
+					if (!root->left || !root->rigth) // if no child or just one child
+					{
+						Node* tmp = NULL;
+						if (root->left)
+							tmp = root->left;
+						else
+							tmp = root->right;
+						if (!tmp) // if no child
+						{
+							_nodeAllocator.destroy(root);
+							_nodeAllocator.deallocate(root, 1);
+							_size -= 1;
+							return ( NULL );
+						}
+						else
+						{
+							_nodeAllocator.destroy(root);
+							_nodeAllocator.deallocate(root, 1);
+							_size -= 1;
+							return ( tmp );
+						}
+					}
+					else // with two children
+					{
+						
+					}
 				}
 			}
 	};
