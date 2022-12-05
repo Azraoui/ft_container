@@ -42,13 +42,13 @@ namespace ft
 				return (this->_node != x._node);
 			}
 			reference operator * () {
-				return (*this->_node->data);
+				return (this->_node->data);
 			}
 			pointer operator -> () {
-				return (this->_node->data);
+				return (&this->_node->data);
 			}
 			const_pointer operator -> () const {
-				return (this->_node->data);
+				return (&this->_node->data);
 			}
 			iterator& operator ++ () {
 				_node = _avl.next_node(_root, _node);

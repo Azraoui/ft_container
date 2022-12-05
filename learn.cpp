@@ -44,15 +44,23 @@ int main()
     cout << t.size() << endl;
     cout << t.capacity() << endl;
     t.max_size();
-    map<char*, string>::iterator it;
-    map<char*, string> map;
-    it = map.begin();
+    map<int, string>::iterator it;
+    map<int, string> map;
     vector<string>::iterator tt;
-    char *s = "a";
-    map.insert(make_pair(s, "abdellah"));
-    map.max_size();
-    cout << map[s] << std::endl;
-    cout << *it->first << std::endl;
+    map.insert(make_pair(1, "abdellah"));
+    map.insert(make_pair(2, "abdeali"));
+    map.insert(make_pair(3, "meryam"));
+    map.insert(make_pair(4, "amin"));
+    map.insert(make_pair(5, "khalid"));
+    it = map.end();
+    cout << "----------------------------" << endl;
+    for (; it != map.begin(); it--)
+        std::cout << "key = " << it->first << " value = " << it->second << std::endl;
+    // std::cout << it->first << std::endl;
+    // map.max_size();
+    // cout << map[s] << std::endl;
+    // cout << *it->first << std::endl;
+
     // cout << t.begin().base() << endl;
 
     // vector<string>::iterator it;
