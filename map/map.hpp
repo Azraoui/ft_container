@@ -30,7 +30,7 @@ namespace ft
 		private:	
 			// private variable
 			allocator_type	_alloc;
-			key_compare		_key_compare;
+			key_compare		_compare;
 			_nodeType*		_root;
 			_avlType		_avlTree;
 
@@ -52,7 +52,7 @@ namespace ft
 			{
 					_root = _avlTree.insert(_root, ft::make_pair(9, 1337));
 					_root = _avlTree.insert(_root, ft::make_pair(5, 1337));
-					_root = _avlTree.insert(_root, ft::make_pair(10, 1337));
+					_root = _avlTree.insert(_root, ft::make_pair(10, 42));
 					_root = _avlTree.insert(_root, ft::make_pair(0, 1337));
 					_root = _avlTree.insert(_root, ft::make_pair(6, 1337));
 					_root = _avlTree.insert(_root, ft::make_pair(11, 1337));
@@ -78,14 +78,24 @@ namespace ft
 				// 	std::cout << node->data.first << std::endl;
 				// 	node = _avlTree.previous_node(_root, node);
 				// }
-				iterator it = end();
-				it--;
-				for (; true; it--)
-				{
+				// iterator it = end();
+				// it--;
+				// for (; true; it--)
+				// {
+				// 	std::cout << it->first << " value = " << it->second << std::endl;
+				// 	if (it == begin())
+				// 		break;
+				// }
+				// _nodeType* nnode = _avlTree.minNode(_root);
+				// while (nnode != NULL)
+				// {
+				// 	std::cout << nnode->data.first << std::endl;
+				// 	nnode = _avlTree.next_node(_root, nnode);
+				// }
+
+				iterator it = find(-1);
+				if (it != end())
 					std::cout << it->first << " value = " << it->second << std::endl;
-					if (it == begin())
-						break;
-				}
 			}
 			// pair<iterator,bool> insert (const value_type& val) { // single element (1)
 				
@@ -104,11 +114,27 @@ namespace ft
 
 			// Observers
 			key_compare key_comp() const {
-				return _key_compare;
+				return _compare;
 			};
 			// value_compare value_comp() const {
 			// 	return value_compare;
 			// };
+
+			// Operations
+			iterator find (const key_type& k) {
+				_nodeType*	tmp = _root;
+				while (tmp != NULL)
+				{
+					if (_compare(k, tmp->data.first))
+						tmp = tmp->left;
+					else if (_compare(tmp->data.first, k))
+						tmp = tmp->right;
+					else
+						return (iterator(tmp, _root));
+				}
+				return end();
+			};
+			// const_iterator find (const key_type& k) const;
 
 			// allocator
 			allocator_type get_allocator() const {
