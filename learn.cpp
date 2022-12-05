@@ -54,8 +54,13 @@ int main()
     map.insert(make_pair(5, "khalid"));
     it = map.end();
     cout << "----------------------------" << endl;
-    for (; it != map.begin(); it--)
+    it--;
+    for (; true; it--)
+    {
         std::cout << "key = " << it->first << " value = " << it->second << std::endl;
+        if (it == map.begin())
+            break;
+    }
     // std::cout << it->first << std::endl;
     // map.max_size();
     // cout << map[s] << std::endl;

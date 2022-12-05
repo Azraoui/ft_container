@@ -60,7 +60,7 @@ namespace ft
 				_node = _avl.next_node(_root, _node);
 				return _old;
 			}
-			iterator operator -- () {
+			iterator& operator -- () {
 				if (_node == _avl.minNode(_root) || _node == NULL)
 					_node = _avl.maxNode(_root);
 				else

@@ -79,9 +79,12 @@ namespace ft
 				// 	node = _avlTree.previous_node(_root, node);
 				// }
 				iterator it = end();
-				for (; it != begin(); --it)
+				it--;
+				for (; true; it--)
 				{
 					std::cout << it->first << " value = " << it->second << std::endl;
+					if (it == begin())
+						break;
 				}
 			}
 			// pair<iterator,bool> insert (const value_type& val) { // single element (1)
