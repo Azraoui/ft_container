@@ -1,4 +1,6 @@
 #include "./map.hpp"
+#include <map>
+#include <vector>
 
 
 
@@ -15,5 +17,13 @@ int main()
 		m.insert(ft::make_pair(1, 1337));
 		m.insert(ft::make_pair(2, 1337));
 		std::cout << m[99] << std::endl;
+
+		m[99] = 1337;
+		ft::map<int, int>::iterator it;
+		for (it = m.begin(); it != m.end(); it++)
+		{
+			std::cout << "key = " << it->first << " value = " << it->second << std::endl;
+		}
+		// std::map<int, int> 
 	return 0;
 }
