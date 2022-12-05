@@ -46,34 +46,16 @@ namespace ft
 			iterator end() {
 				return iterator(NULL, _root);
 			};
+			// Element access
+			mapped_type& operator[] (const key_type& k) {
+				iterator it = find(k);
+				if (it != end())
+					return (it->second);
+				insert(ft::make_pair(k, mapped_type()));
+				return (find(k)->second);
+			};
 
 			// Modifiers:
-			void	insert(void)
-			{
-					insert(ft::make_pair(9, 1337));
-					insert(ft::make_pair(5, 1337));
-					insert(ft::make_pair(10, 1337));
-					insert(ft::make_pair(0, 1337));
-					insert(ft::make_pair(6, 1337));
-					insert(ft::make_pair(11, 1337));
-					insert(ft::make_pair(-1, 1337));
-					insert(ft::make_pair(1, 1337));
-					insert(ft::make_pair(2, 1337));
-
-				_nodeType* nnode = _avlTree.minNode(_root);
-				while (nnode != NULL)
-				{
-					std::cout << nnode->data.first << std::endl;
-					nnode = _avlTree.next_node(_root, nnode);
-				}
-				_root = _avlTree.delete_node(_root, 6);
-				_nodeType* node = _avlTree.minNode(_root);
-				while (node != NULL)
-				{
-					std::cout << node->data.first << std::endl;
-					node = _avlTree.next_node(_root, node);
-				}
-			} // end of test insert
 			pair<iterator,bool> insert (const value_type& val) { // single element (1)
 				iterator it = find(val.first);
 				if (it != end())
@@ -95,15 +77,22 @@ namespace ft
 				for (; first != last; first++)
 					insert(*first);
 			};
-			// void erase (iterator position) { // (1)
-				
-			// };
-			// size_type erase (const key_type& k) { // (2)
-
-			// };
-			// void erase (iterator first, iterator last) { // (3)
-
-			// };
+			void erase (iterator position) { // (1)
+				_root = _avlTree.delete_node(position._root, position._node->data.first);
+			};
+			size_type erase (const key_type& k) { // (2)
+				size_type __size = size();
+				_root = _avlTree.delete_node(_root, k);
+				if (__size > size())
+					return (1);
+				return (0);
+			};
+			void erase (iterator first, iterator last) { // (3)
+				for (; first != last; first++)
+				{
+					erase(first);
+				}
+			};
 
 			// capacity
 			bool empty() const {
