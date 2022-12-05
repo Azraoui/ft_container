@@ -88,9 +88,29 @@ namespace ft
 				return (0);
 			};
 			void erase (iterator first, iterator last) { // (3)
-				for (; first != last; first++)
+				iterator tmp(first);
+				for (; first != last; first = tmp)
+				{
+					tmp++;
 					erase(first);
+				}
 			};
+			void swap (map& x) {
+				std::swap(this->_alloc, x._alloc);
+				std::swap(this->_compare, x._compare);
+				std::swap(this->_root, x._root);
+				std::swap(this->_avlTree, x._avlTree);
+				std::swap(this->size(), x.size());
+			};
+			void	clear()
+			{
+				if (_root == NULL)
+					return ;
+				clear(_root->left);
+				clear(_root->right);
+				_avlTree._nodeAllocator.destroy(_root);
+				_avlTree._nodeAllocator.deallocate(_root, 1);
+			}
 
 			// capacity
 			bool empty() const {

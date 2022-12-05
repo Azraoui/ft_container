@@ -26,6 +26,7 @@ namespace ft
 			// construct && destruct
 			iterator() : _avl(), _node(NULL), _root(NULL) {};
 			iterator(Node* node, Node* root) : _avl(), _node(node), _root(root) {};
+			iterator(const iterator &x) : _avl(x._avl), _node(x._node), _root(x._root) {}
 			~iterator() {};
 			iterator	operator = (const iterator &x)
 			{
