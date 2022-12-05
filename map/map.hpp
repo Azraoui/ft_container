@@ -59,52 +59,21 @@ namespace ft
 					insert(ft::make_pair(-1, 1337));
 					insert(ft::make_pair(1, 1337));
 					insert(ft::make_pair(2, 1337));
-					// _root = _avlTree.insert(_root, ft::make_pair(9, 1337));
-					// _root = _avlTree.insert(_root, ft::make_pair(5, 1337));
-					// _root = _avlTree.insert(_root, ft::make_pair(10, 42));
-					// _root = _avlTree.insert(_root, ft::make_pair(0, 1337));
-					// _root = _avlTree.insert(_root, ft::make_pair(6, 1337));
-					// _root = _avlTree.insert(_root, ft::make_pair(11, 1337));
-					// _root = _avlTree.insert(_root, ft::make_pair(-1, 1337));
-					// _root = _avlTree.insert(_root, ft::make_pair(1, 1337));
-					// _root = _avlTree.insert(_root, ft::make_pair(2, 1337));
-				
-				// std::cout << _avlTree.get_height(_root) << std::endl;
-				// std::cout << "size = " << size() << std::endl;
-				// if (empty())
-				// 	std::cout << "map empty" << std::endl;
-				// else
-				// 	std::cout << "may not empty" << std::endl;
-				// std::cout << "max_size = " << max_size() << std::endl;
 
-				// ------------------------------------------
-
-				// _nodeType*	parent = _avlTree.findParent(_root,9);
-				// std::cout << parent->data.first << std::endl;
-				// _nodeType* node = _avlTree.maxNode(_root);
-				// while (node != NULL)
-				// {
-				// 	std::cout << node->data.first << std::endl;
-				// 	node = _avlTree.previous_node(_root, node);
-				// }
-				// iterator it = end();
-				// it--;
-				// for (; true; it--)
-				// {
-				// 	std::cout << it->first << " value = " << it->second << std::endl;
-				// 	if (it == begin())
-				// 		break;
-				// }
 				_nodeType* nnode = _avlTree.minNode(_root);
 				while (nnode != NULL)
 				{
 					std::cout << nnode->data.first << std::endl;
 					nnode = _avlTree.next_node(_root, nnode);
 				}
-				iterator it = find(-1);
-				if (it != end())
-					std::cout << it->first << " value = " << it->second << std::endl;
-			}
+				_root = _avlTree.delete_node(_root, 6);
+				_nodeType* node = _avlTree.minNode(_root);
+				while (node != NULL)
+				{
+					std::cout << node->data.first << std::endl;
+					node = _avlTree.next_node(_root, node);
+				}
+			} // end of test insert
 			pair<iterator,bool> insert (const value_type& val) { // single element (1)
 				iterator it = find(val.first);
 				if (it != end())
@@ -126,15 +95,15 @@ namespace ft
 				for (; first != last; first++)
 					insert(*first);
 			};
-			void erase (iterator position) { // (1)
+			// void erase (iterator position) { // (1)
 				
-			};
-			size_type erase (const key_type& k) { // (2)
+			// };
+			// size_type erase (const key_type& k) { // (2)
 
-			};
-			void erase (iterator first, iterator last) { // (3)
+			// };
+			// void erase (iterator first, iterator last) { // (3)
 
-			};
+			// };
 
 			// capacity
 			bool empty() const {

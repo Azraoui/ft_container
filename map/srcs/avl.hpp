@@ -89,45 +89,45 @@ namespace ft
 			Node*	insert(Node* root, T data) {
 
 				// BST
-				if (node == NULL)
+				if (root == NULL)
 				{
 					_size += 1;
 					return (new_node(data));
 				}
-				if (_compare(data.first, node->data.first))
-					node->left = insert(node->left, data);
-				else if (_compare(node->data.first, data.first))
-					node->right = insert(node->right, data);
+				if (_compare(data.first, root->data.first))
+					root->left = insert(root->left, data);
+				else if (_compare(root->data.first, data.first))
+					root->right = insert(root->right, data);
 				else
-					return node; // If the key is entered
+					return root; // If the key is entered
 
 				// update height
-				node->height = 1 + (std::max(get_height(node->left), get_height(node->right)));
+				root->height = 1 + (std::max(get_height(root->left), get_height(root->right)));
 
 				// get balance factory
-				int	balanceFactory = getBF(node);
+				int	balanceFactory = getBF(root);
 
 				// Start balancing BST to be AVL
 				
 				// left left case
-				if (balanceFactory > 1 && _compare(data.first, node->left->data.first))
-					return (rightRotate(node));
+				if (balanceFactory > 1 && _compare(data.first, root->left->data.first))
+					return (rightRotate(root));
 				// left right case
-				if (balanceFactory > 1 && _compare(node->left->data.first, data.first))
+				if (balanceFactory > 1 && _compare(root->left->data.first, data.first))
 				{
-					node->left = (leftRotate(node->left));
-					return (rightRotate(node));
+					root->left = (leftRotate(root->left));
+					return (rightRotate(root));
 				}
 				// right right case
-				if (balanceFactory < -1 && _compare(node->right->data.first, data.first))
-					return (leftRotate(node));
+				if (balanceFactory < -1 && _compare(root->right->data.first, data.first))
+					return (leftRotate(root));
 				// right left case
-				if (balanceFactory < -1 && _compare(data.first, node->right->data.first))
+				if (balanceFactory < -1 && _compare(data.first, root->right->data.first))
 				{
-					node->right = (rightRotate(node->right));
-					return (leftRotate(node));
+					root->right = (rightRotate(root->right));
+					return (leftRotate(root));
 				}
-				return (node); // if no change happen;
+				return (root); // if no change happen;
 			};
 			Node*	minNode(Node* root)
 			{
@@ -204,14 +204,14 @@ namespace ft
 					root->left = delete_node(root->left, key);
 				else
 				{
-					if (!root->left || !root->rigth) // if no child or just one child
+					if (!root->left || !root->right) // if no child or just one child
 					{
 						Node* tmp = NULL;
 						if (root->left)
 							tmp = root->left;
 						else
 							tmp = root->right;
-						if (!tmp) // if no child
+						if (!tmp) // if no childs
 						{
 							_nodeAllocator.destroy(root);
 							_nodeAllocator.deallocate(root, 1);
@@ -242,19 +242,19 @@ namespace ft
 				// Start balancing BST to be AVL
 				
 				// left left case
-				if (balanceFactory > 1 && _compare(data.first, root->left->data.first))
+				if (balanceFactory > 1 && _compare(root->data.first, root->left->data.first))
 					return (rightRotate(root));
 				// left right case
-				if (balanceFactory > 1 && _compare(root->left->data.first, data.first))
+				if (balanceFactory > 1 && _compare(root->left->data.first, root->data.first))
 				{
 					root->left = (leftRotate(root->left));
 					return (rightRotate(root));
 				}
 				// right right case
-				if (balanceFactory < -1 && _compare(root->right->data.first, data.first))
+				if (balanceFactory < -1 && _compare(root->right->data.first, root->data.first))
 					return (leftRotate(root));
 				// right left case
-				if (balanceFactory < -1 && _compare(data.first, root->right->data.first))
+				if (balanceFactory < -1 && _compare(root->data.first, root->right->data.first))
 				{
 					root->right = (rightRotate(root->right));
 					return (leftRotate(root));
