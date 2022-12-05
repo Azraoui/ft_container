@@ -89,9 +89,7 @@ namespace ft
 			};
 			void erase (iterator first, iterator last) { // (3)
 				for (; first != last; first++)
-				{
 					erase(first);
-				}
 			};
 
 			// capacity
