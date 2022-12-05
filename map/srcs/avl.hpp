@@ -228,9 +228,38 @@ namespace ft
 					}
 					else // with two children
 					{
-						
+						Node* tmp = maxNode(root->left);
+						_allocator.destroy(&root->data);
+						_allocator.construct(&root->data, tmp->data);
+						root->left = delete_node(root->left, tmp->data.first);
 					}
 				}
+				root->height = 1 + (std::max(get_height(root->left), get_height(root->right)));
+
+				// get balance factory
+				int	balanceFactory = getBF(root);
+
+				// Start balancing BST to be AVL
+				
+				// left left case
+				if (balanceFactory > 1 && _compare(data.first, root->left->data.first))
+					return (rightRotate(root));
+				// left right case
+				if (balanceFactory > 1 && _compare(root->left->data.first, data.first))
+				{
+					root->left = (leftRotate(root->left));
+					return (rightRotate(root));
+				}
+				// right right case
+				if (balanceFactory < -1 && _compare(root->right->data.first, data.first))
+					return (leftRotate(root));
+				// right left case
+				if (balanceFactory < -1 && _compare(data.first, root->right->data.first))
+				{
+					root->right = (rightRotate(root->right));
+					return (leftRotate(root));
+				}
+				return (root); // if no change happen;
 			}
 	};
 }
