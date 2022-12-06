@@ -164,6 +164,17 @@ namespace ft
 			// const_iterator lower_bound (const key_type& k) const {
 
 			// };
+			iterator upper_bound (const key_type& k) {
+				_nodeType*	maxNode = _avlTree.maxNode(_root);
+				_nodeType*	minNode = _avlTree.minNode(_root);
+				if (_compare(maxNode->data.first, k))
+					return end();
+				else if (_compare(k, minNode->data.first))
+					return (iterator(minNode, _root));
+				else
+					return (++(find(k)));
+			};
+			// const_iterator upper_bound (const key_type& k) const;
 
 			// allocator
 			allocator_type get_allocator() const {

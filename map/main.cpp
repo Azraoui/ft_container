@@ -19,7 +19,7 @@ int main()
 
 
 		ft::map<int, int>::iterator it_toLower;
-		it_toLower = m.lower_bound(0);
+		it_toLower = m.upper_bound(10);
 		if (it_toLower != m.end())
 			std::cout << "key = "<< it_toLower->first << " " << it_toLower->second << std::endl;
 		// std::cout << m[99] << std::endl;
