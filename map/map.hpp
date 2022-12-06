@@ -102,7 +102,7 @@ namespace ft
 				std::swap(this->_avlTree, x._avlTree);
 				std::swap(this->size(), x.size());
 			};
-			void	clear()
+			void clear()
 			{
 				if (_root == NULL)
 					return ;
