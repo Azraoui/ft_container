@@ -3,6 +3,7 @@
 #include "./utils/utils.hpp"
 #include "./srcs/avl.hpp"
 #include "./iterators/iterator.hpp"
+#include "./iterators/const_iterator.hpp"
 
 namespace ft
 {
@@ -26,6 +27,7 @@ namespace ft
 			typedef				ft::Node< value_type >											_nodeType;
 			typedef				ft::Avl<value_type, _nodeType, allocator_type, key_compare>		_avlType;
 			typedef				iterator<value_type, _nodeType, _avlType>						iterator;
+			typedef				const_iterator<value_type, _nodeType, _avlType>					const_iterator;
 
 		private:	
 			// private variable

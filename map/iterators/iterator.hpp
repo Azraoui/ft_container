@@ -48,9 +48,6 @@ namespace ft
 			pointer operator -> () {
 				return (&this->_node->data);
 			}
-			const_pointer operator -> () const {
-				return (&this->_node->data);
-			}
 			iterator& operator ++ () {
 				_node = _avl.next_node(_root, _node);
 				return (*this);
