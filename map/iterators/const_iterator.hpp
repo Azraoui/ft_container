@@ -6,7 +6,7 @@
 namespace ft
 {
 	template <typename T, typename Node, typename Avl>
-	class const_iterator // bidirectional_iterator
+	class const_iterator // bidirectional_iterator with const_iterator
 	{
 		public:
 			typedef	const_iterator					iterator_type;
