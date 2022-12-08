@@ -74,11 +74,15 @@ namespace ft
 			reverse_iterator rbegin() {
 				return reverse_iterator(end());
 			};
-			// const_reverse_iterator rbegin() const;
+			const_reverse_iterator rbegin() const {
+				return const_reference(end());
+			};
 			reverse_iterator rend() {
 				return reverse_iterator(begin());
 			};
-			// const_reverse_iterator rend() const;
+			const_reverse_iterator rend() const {
+				return const_reverse_iterator(begin());
+			};
 
 			// Element access
 			mapped_type& operator[] (const key_type& k) {
