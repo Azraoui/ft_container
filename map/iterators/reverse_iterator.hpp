@@ -46,5 +46,33 @@ namespace ft
 			 * @brief Destructor
 			 */
 			~reverse_iterator() {};
+
+			// ---------------------------------------------------
+
+			iterator_type base() const {
+				return (this->__base_it)
+			};
+			reference operator*() const {
+				iterator_type tmp = __base_it;
+				tmp--;
+				return (*tmp);
+			};
+			reverse_iterator operator+ (difference_type n) const {
+				__base_it -= n;
+				return (reverse_iterator(__base_it));
+			};
+			reverse_iterator& operator++() {
+				__base_it--;
+				return (*this);
+			};
+			reverse_iterator  operator++(int) {
+				reverse_iterator tmp(__base_it);
+				__base_it--;
+				return (tmp);
+			};
+			reverse_iterator operator- (difference_type n) const {
+				__base_it += n;
+				return (reverse_iterator(__base_it));
+			};
 	};
 }
