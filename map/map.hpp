@@ -182,7 +182,19 @@ namespace ft
 				}
 				return end();
 			};
-			// const_iterator find (const key_type& k) const;
+			const_iterator find (const key_type& k) const {
+				_nodeType*	tmp = _root;
+				while (tmp != NULL)
+				{
+					if (_compare(k, tmp->data.first))
+						tmp = tmp->left;
+					else if (_compare(tmp->data.first, k))
+						tmp = tmp->right;
+					else
+						return (const_iterator(tmp, _root));
+				}
+				return end();
+			};
 			size_type count (const key_type& k) const {
 				if (find(k) != end())
 					return (1);
@@ -198,9 +210,16 @@ namespace ft
 				else
 					return (find(k));
 			};
-			// const_iterator lower_bound (const key_type& k) const {
-
-			// };
+			const_iterator lower_bound (const key_type& k) const {
+				_nodeType*	maxNode = _avlTree.maxNode(_root);
+				_nodeType*	minNode = _avlTree.minNode(_root);
+				if (_compare(maxNode->data.first, k))
+					return end();
+				else if (_compare(k, minNode->data.first))
+					return (const_iterator(minNode, _root));
+				else
+					return (find(k));
+			};
 			iterator upper_bound (const key_type& k) {
 				_nodeType*	maxNode = _avlTree.maxNode(_root);
 				_nodeType*	minNode = _avlTree.minNode(_root);
@@ -211,8 +230,19 @@ namespace ft
 				else
 					return (++(find(k)));
 			};
-			// const_iterator upper_bound (const key_type& k) const;
-			// pair<const_iterator,const_iterator> equal_range (const key_type& k) const;
+			const_iterator upper_bound (const key_type& k) const {
+				_nodeType*	maxNode = _avlTree.maxNode(_root);
+				_nodeType*	minNode = _avlTree.minNode(_root);
+				if (_compare(maxNode->data.first, k))
+					return end();
+				else if (_compare(k, minNode->data.first))
+					return (const_iterator(minNode, _root));
+				else
+					return (++(find(k)));
+			};
+			ft::pair<const_iterator,const_iterator> equal_range (const key_type& k) const {
+				return (ft::make_pair(lower_bound(k), upper_bound(k)));
+			};
 			ft::pair<iterator, iterator> equal_range (const key_type& k) {
 				return (ft::make_pair(lower_bound(k), upper_bound(k)));
 			};
