@@ -1,6 +1,6 @@
 #pragma once
 
-#include "./srcs/avl.hpp"
+#include "../srcs/avl.hpp"
 #include "./iterator_traits.hpp"
 
 namespace ft
@@ -58,21 +58,42 @@ namespace ft
 				return (*tmp);
 			};
 			reverse_iterator operator+ (difference_type n) const {
-				__base_it -= n;
-				return (reverse_iterator(__base_it));
+				return (reverse_iterator(__base_it - n));
 			};
 			reverse_iterator& operator++() {
 				__base_it--;
 				return (*this);
 			};
-			reverse_iterator  operator++(int) {
-				reverse_iterator tmp(__base_it);
-				__base_it--;
-				return (tmp);
+			reverse_iterator operator++(int) {
+  				reverse_iterator temp = *this;
+  				++(*this);
+ 	 			return temp;
+			}
+			reverse_iterator& operator+= (difference_type n) {
+				__base_it -= n;
+				return (*this);
 			};
 			reverse_iterator operator- (difference_type n) const {
+				return (reverse_iterator(__base_it + n));
+			};
+			reverse_iterator& operator--() {
+				__base_it++;
+				return (*this);
+			};
+			reverse_iterator operator--(int) {
+  				reverse_iterator temp = *this;
+  				--(*this);
+  				return temp;
+			};
+			reverse_iterator& operator-= (difference_type n) {
 				__base_it += n;
-				return (reverse_iterator(__base_it));
+				return (*this);
+			};
+			pointer operator->() const {
+				return (&operator*());
+			};
+			reference operator[] (difference_type n) const {
+				
 			};
 	};
 }
