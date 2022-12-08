@@ -17,11 +17,11 @@ int main () {
                                                          //         <------
   std::reverse_iterator<iter_type> rev_from (until);     //                     ^
 
-  // std::cout << "myvector:";
-  // while (rev_from != rev_until)
-  //   std::cout << ' ' << *rev_from++;
-  // std::cout << '\n';
-  std::cout << from[-3] << std::endl;
+  std::cout << "myvector:";
+  while (rev_from != rev_until)
+    std::cout << ' ' << *rev_from++;
+  std::cout << '\n';
+  // std::cout << from[-3] << std::endl;
 
   return 0;
 }

@@ -5,6 +5,7 @@
 #include "./iterators/iterator.hpp"
 #include "./iterators/const_iterator.hpp"
 #include "./reverse_iterator.hpp"
+#include "./iterator_traits.hpp"
 
 namespace ft
 {
@@ -24,12 +25,13 @@ namespace ft
 			typedef	typename	allocator_type::pointer							pointer;
 			typedef	typename	allocator_type::const_pointer					const_pointer;
 			typedef				size_t											size_type;
-			typedef				ptrdiff_t										difference_type; // ned to change it iterator_trait
 			typedef				ft::Node< value_type >											_nodeType;
 			typedef				ft::Avl<value_type, _nodeType, allocator_type, key_compare>		_avlType;
 			typedef				iterator<value_type, _nodeType, _avlType>						iterator;
 			typedef				const_iterator<value_type, _nodeType, _avlType>					const_iterator;
 			typedef				reverse_iterator<iterator>										reverse_iterator;
+			typedef				reverse_iterator<const_iterator>								const_reverse_iterator;
+			typedef	typename	ft::Iterator_traits<iterator>::difference_type					difference_type;
 
 		private:	
 			// private variable
@@ -60,9 +62,24 @@ namespace ft
 			iterator begin() {
 				return iterator(_avlTree.minNode(_root), _root);
 			};
+			const_iterator begin() const {
+				return const_iterator(_avlTree.minNode(_root), _root);
+			};
 			iterator end() {
 				return iterator(NULL, _root);
 			};
+			const_iterator end() const {
+				return const_iterator(NULL, _root);
+			};
+			reverse_iterator rbegin() {
+				return reverse_iterator(end());
+			};
+			// const_reverse_iterator rbegin() const;
+			reverse_iterator rend() {
+				return reverse_iterator(begin());
+			};
+			// const_reverse_iterator rend() const;
+
 			// Element access
 			mapped_type& operator[] (const key_type& k) {
 				iterator it = find(k);
