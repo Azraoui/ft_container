@@ -93,7 +93,13 @@ namespace ft
 				return (&operator*());
 			};
 			reference operator[] (difference_type n) const {
-				
+				return (base()[-n-1]);
 			};
+	}; // End of reverse_iterator
+
+	// relational operators (reverse_iterator)
+	template <class Iterator>
+	bool operator== (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs) {
+		
 	};
 }
