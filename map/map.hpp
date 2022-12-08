@@ -43,6 +43,19 @@ namespace ft
 			map(): _root(), _avlTree() {};
 			~map() {};
 
+			// Nested class
+			class value_compare : public std::binary_function<value_type, value_type, bool>
+			{	// in C++98, it is required to inherit binary_function<value_type,value_type,bool>
+				friend class map;
+				protected:
+					Compare comp;
+					value_compare (Compare c) : comp(c) {};  // constructed with map's comparison object
+				public:
+					bool operator() (const value_type& x, const value_type& y) const{
+						return comp(x.first, y.first);
+					}
+			}
+
 			// Iterators:
 			iterator begin() {
 				return iterator(_avlTree.minNode(_root), _root);
@@ -131,10 +144,9 @@ namespace ft
 			key_compare key_comp() const {
 				return _compare;
 			};
-			// value_compare value_comp() const {
-			// 	return value_compare;
-			// };
-
+			value_compare value_comp() const {
+				return value_compare(_compare);
+			};
 			// Operations
 			iterator find (const key_type& k) {
 				_nodeType*	tmp = _root;
