@@ -29,8 +29,8 @@ namespace ft
 			typedef				ft::Avl<value_type, _nodeType, allocator_type, key_compare>		_avlType;
 			typedef				iterator<value_type, _nodeType, _avlType>						iterator;
 			typedef				const_iterator<value_type, _nodeType, _avlType>					const_iterator;
-			typedef				reverse_iterator<iterator>										reverse_iterator;
-			typedef				reverse_iterator<const_iterator>								const_reverse_iterator;
+			typedef				Reverse_iterator<iterator>										reverse_iterator;
+			typedef				Reverse_iterator<const_iterator>								const_reverse_iterator;
 			typedef	typename	ft::Iterator_traits<iterator>::difference_type					difference_type;
 
 		private:	
