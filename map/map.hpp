@@ -56,7 +56,7 @@ namespace ft
 					bool operator() (const value_type& x, const value_type& y) const{
 						return comp(x.first, y.first);
 					}
-			}
+			};
 
 			// Iterators:
 			iterator begin() {
