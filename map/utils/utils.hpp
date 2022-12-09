@@ -44,9 +44,7 @@ namespace ft
 	struct is_integral<unsigned long long int>{ const bool value = true;};
 
 	template <bool Cond, class T = void>
-	struct enable_if
-	{
-		
-	};
-
+	struct enable_if {};
+	template<class T>
+	struct enable_if<true, T> { typedef T type; };
 }
