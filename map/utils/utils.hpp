@@ -9,4 +9,12 @@ namespace ft
 	{
 		return ( ft::pair<T1,T2>(x,y) );
 	}
+	template <class T>
+	class is_integral
+	{
+		public:
+			typedef bool	value_type;
+			typedef	T		type;
+			value_type		value;
+	};
 }
