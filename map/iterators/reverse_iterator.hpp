@@ -1,12 +1,11 @@
 #pragma once
 
-#include "../srcs/avl.hpp"
 #include "./iterator_traits.hpp"
 
 namespace ft
 {
 	template <class Iterator>
-	class Reverse_iterator 
+	class Reverse_iterator
 	{
 		public:
 			typedef				Iterator											iterator_type;
@@ -50,7 +49,7 @@ namespace ft
 			// ---------------------------------------------------
 
 			iterator_type base() const {
-				return (this->__base_it)
+				return (this->__base_it);
 			};
 			reference operator*() const {
 				iterator_type tmp = __base_it;
