@@ -4,7 +4,7 @@ MAIN = ./main.cpp
 
 SRC = $(MAIN)
 
-INC = ./map.hpp ./utils/utils.hpp ./utils/pair.hpp ./srcs/avl.hpp
+INC = ./map.hpp ./utils/utils.hpp ./utils/pair.hpp ./srcs/avl.hpp ./iterators/*.hpp
 
 DBUG = -fsanitize=address -g
 

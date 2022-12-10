@@ -1,27 +1,24 @@
-// reverse_iterator example
-#include <iostream>     // std::cout
-#include <iterator>     // std::reverse_iterator
-#include <vector>       // std::vector
+// enable_if example: two ways of using enable_if
+#include <iostream>
+#include <type_traits>
 
-int main () {
-  std::vector<int> myvector;
-  for (int i=0; i<10; i++) myvector.push_back(i);
+// 1. the return type (bool) is only valid if T is an integral type:
+template <class T>
+typename std::enable_if<std::is_integral<T>::value,bool>::type
+  is_odd (T i) {return bool(i%2);}
 
-  typedef std::vector<int>::iterator iter_type;
-                                                         // ? 9 8 7 6 5 4 3 2 1 0 ?
-  iter_type from (myvector.begin());                     //   ^
-                                                         //         ------>
-  iter_type until (myvector.end());                      //                       ^
-                                                         //
-  std::reverse_iterator<iter_type> rev_until (from);     // ^
-                                                         //         <------
-  std::reverse_iterator<iter_type> rev_from (until);     //                     ^
+// 2. the second template argument is only valid if T is an integral type:
+template < class T,
+           class = typename std::enable_if<std::is_integral<T>::value>::type >
+bool is_even (T i) {return !bool(i%2);}
 
-  std::cout << "myvector:";
-  while (rev_from != rev_until)
-    std::cout << ' ' << *rev_from++;
-  std::cout << '\n';
-  // std::cout << from[-3] << std::endl;
+int main() {
+
+  short int i = 1;    // code does not compile if type of i is not integral
+
+  std::cout << std::boolalpha;
+  std::cout << "i is odd: " << is_odd(i) << std::endl;
+  std::cout << "i is even: " << is_even(i) << std::endl;
 
   return 0;
 }

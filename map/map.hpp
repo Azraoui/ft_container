@@ -4,8 +4,7 @@
 #include "./srcs/avl.hpp"
 #include "./iterators/iterator.hpp"
 #include "./iterators/const_iterator.hpp"
-#include "./reverse_iterator.hpp"
-#include "./iterator_traits.hpp"
+#include "./iterators/reverse_iterator.hpp"
 
 namespace ft
 {
