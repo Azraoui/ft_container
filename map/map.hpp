@@ -40,17 +40,26 @@ namespace ft
 			_avlType		_avlTree;
 
 		public:
-			// constructor && destructor
+			// constructor
 			explicit map (const key_compare& comp = key_compare(),
-						const allocator_type& alloc = allocator_type()) : _compare(comp), _alloc(alloc), _root(NULL), _avlTree();
+						const allocator_type& alloc = allocator_type()) :_root(NULL), _avlTree(NULL, _root);
 			{}; // empty
 			template <class InputIterator>
   			map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(),
        				const allocator_type& alloc = allocator_type())
-			{
+			{ // range
 				
 			};
+			map (const map& x) // copy
+			{
+
+			};
+
+			// destructor
 			~map() {};
+
+			// copy assigmnet operator
+			map& operator= (const map& x) {};
 
 			// Nested class
 			class value_compare : public std::binary_function<value_type, value_type, bool>
