@@ -46,20 +46,28 @@ namespace ft
 			{}; // empty
 			template <class InputIterator>
   			map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(),
-       				const allocator_type& alloc = allocator_type())
+       				const allocator_type& alloc = allocator_type()) : _root(NULL), _avlTree(NULL, _root)
 			{ // range
-				
+				this->insert(first, last);
 			};
 			map (const map& x) // copy
 			{
-
+				*this = x;
 			};
 
 			// destructor
 			~map() {};
 
 			// copy assigmnet operator
-			map& operator= (const map& x) {};
+			map& operator= (const map& x) {
+				if (this != &x)
+				{
+					_alloc = x._alloc;
+					_compare = x._compare;
+					this->insert(x.begin(), x.end());
+				}
+				return (*this);
+			};
 
 			// Nested class
 			class value_compare : public std::binary_function<value_type, value_type, bool>
