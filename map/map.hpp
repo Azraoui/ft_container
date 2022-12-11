@@ -153,11 +153,10 @@ namespace ft
 				return (0);
 			};
 			void erase (iterator first, iterator last) { // (3)
-				iterator tmp(first);
-				for (; first != last; first = tmp)
+				while (first != last)
 				{
-					tmp++;
-					erase(first);
+					_root = _avlTree.delete_node(_root, first->first);
+					first++;
 				}
 			};
 			void swap (map& x) {
