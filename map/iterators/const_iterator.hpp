@@ -17,15 +17,15 @@ namespace ft
 			typedef	const value_type&				reference;
 
 		public:
-			Avl		    _avl;
-			const Node*	_node;
-			const Node*	_root;
+			Avl			_avl;
+			Node*		_node;
+			Node*		_root;
 
 		public:
 			// construct && destruct
 			const_iterator() : _avl(), _node(NULL), _root(NULL) {};
-			const_iterator(const Node* node, const Node* root) : _avl(), _node(node), _root(root) {};
-			const_iterator(const const_iterator &x) : _avl(x._avl), _node(x._node), _root(x._root) {};
+			const_iterator(Node* node, Node* root) : _avl(), _node(node), _root(root) {};
+			const_iterator(const const_iterator &x) :_node(x._node), _root(x._root) {};
 			~const_iterator() {};
 			const_iterator	operator = (const const_iterator &x)
 			{

@@ -3,8 +3,12 @@
 #include <iostream>
 #include "../srcs/avl.hpp"
 
+
 namespace ft
 {
+	template <typename T, typename Node, typename Avl>
+	class const_iterator;
+	
 	template <typename T, typename Node, typename Avl>
 	class iterator // bidirectional_iterator
 	{
@@ -26,8 +30,14 @@ namespace ft
 			// construct && destruct
 			iterator() : _avl(), _node(NULL), _root(NULL) {};
 			iterator(Node* node, Node* root) : _avl(), _node(node), _root(root) {};
-			iterator(const iterator &x) : _avl(x._avl), _node(x._node), _root(x._root) {}
+			iterator(const iterator &x) :_node(x._node), _root(x._root) {}
 			~iterator() {};
+
+			operator const_iterator<T,Node, Avl>()
+			{
+				return const_iterator<T,Node, Avl>(this->_node, this->_root);
+			}
+
 			iterator	operator = (const iterator &x)
 			{
 				this->_node = x._node;
@@ -36,16 +46,16 @@ namespace ft
 			}
 
 			// overload
-			bool operator == ( const iterator& x ) {
+			bool operator == ( const iterator& x ) const{
 				return (this->_node == x._node);
 			}
 			bool operator != ( const iterator& x ) {
 				return (this->_node != x._node);
 			}
-			reference operator * () {
+			reference operator * () const{
 				return (this->_node->data);
 			}
-			pointer operator -> () {
+			pointer operator -> () const{
 				return (&this->_node->data);
 			}
 			iterator& operator ++ () {
