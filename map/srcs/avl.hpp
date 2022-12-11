@@ -131,12 +131,16 @@ namespace ft
 			};
 			Node*	minNode(Node* root) const
 			{
+				if (root == NULL)
+					return NULL;
 				if (root->left == NULL)
 					return (root);
 				return (minNode(root->left));
 			}
 			Node*	maxNode(Node*	root) const
 			{
+				if (root == NULL)
+					return NULL;
 				if (root->right == NULL)
 					return (root);
 				return (maxNode(root->right));
@@ -261,14 +265,20 @@ namespace ft
 				}
 				return (root); // if no change happen;
 			}
-			void	clear(Node* root)
+			void	clearNode(Node** root)
 			{
-				if (root == NULL)
+				if (*root == NULL)
 					return ;
-				clear(root->left);
-				clear(root->right);
-				_nodeAllocator.destroy(root);
-				_nodeAllocator.deallocate(root, 1);
+				clear(&(*root)->left);
+				clear(&(*root)->right);
+				_nodeAllocator.destroy(*root);
+				_nodeAllocator.deallocate(*root, 1);
+			}
+			void clear(Node **root)
+			{
+				clearNode(root);
+				*root = NULL;
+				_size = 0;
 			}
 	};
 }

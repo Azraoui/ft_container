@@ -1,5 +1,5 @@
-#include "./map.hpp"
 // #include "../vector/vector.hpp"
+#include "./map.hpp"
 #include "./utils/pair.hpp"
 #include <map>
 
@@ -75,7 +75,6 @@ bool testmapConstructors()
         first[i - 97] = i;
         m_first[i - 97] = i;
     }
-
     std::map<char, int> copy(first);
     ft::map<char, int> m_copy(m_first);
 
@@ -1311,6 +1310,7 @@ void testModifiers()
             diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
             /*-----------------------------------------------------*/
             /*------------------ ft::maps ---------------------*/
+            std::cout << "------ i was here ----------" << std::endl;//------------------------------------------------------------------------------
             ualarm(diff * 1e3, 0);
             ft_m1.erase(ft_m1.begin(), ft_m1.end());
             ualarm(0, 0);

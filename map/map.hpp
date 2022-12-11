@@ -50,7 +50,7 @@ namespace ft
 			{ // range
 				this->insert(first, last);
 			};
-			map (const map& x) // copy
+			map (const map& x): _root(NULL) // copy
 			{
 				*this = x;
 			};
@@ -60,6 +60,8 @@ namespace ft
 
 			// copy assigmnet operator
 			map& operator= (const map& x) {
+				if (size())
+					this->clear();
 				if (this != &x)
 				{
 					_alloc = x._alloc;
@@ -166,7 +168,7 @@ namespace ft
 			};
 			void clear()
 			{
-				_avlTree.clear(_root);
+				_avlTree.clear(&_root);
 			}
 
 			// capacity
