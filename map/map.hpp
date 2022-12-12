@@ -58,6 +58,20 @@ namespace ft
 			// destructor
 			~map() {};
 
+			// void test() {
+			// 	for (int i = 0; i < 20; i++)
+			// 	{
+			// 		_root = _avlTree.insert(_root, ft::make_pair(i, 10 + i));
+			// 	}
+			// 	for (int i = 0; i < 20; i++)
+			// 	{
+			// 		std::cout << " i = " << i << std::endl;
+			// 		_root = _avlTree.delete_node(_root, i);
+			// 		// _root = _avlTree.insert(_root, ft::make_pair(i, 10 + i));
+			// 	}
+			// 	// std::cout << _root->data.first << std::endl;
+			// };
+
 			// copy assigmnet operator
 			map& operator= (const map& x) {
 				if (size())
@@ -154,10 +168,7 @@ namespace ft
 			};
 			void erase (iterator first, iterator last) { // (3)
 				while (first != last)
-				{
-					_root = _avlTree.delete_node(_root, first->first);
-					first++;
-				}
+					erase(first++);
 			};
 			void swap (map& x) {
 				std::swap(this->_alloc, x._alloc);

@@ -238,6 +238,8 @@ namespace ft
 						root->left = delete_node(root->left, tmp->data.first);
 					}
 				}
+				if (root == NULL)
+					return NULL;
 				root->height = 1 + (std::max(get_height(root->left), get_height(root->right)));
 
 				// get balance factory
@@ -246,19 +248,19 @@ namespace ft
 				// Start balancing BST to be AVL
 				
 				// left left case
-				if (balanceFactory > 1 && _compare(root->data.first, root->left->data.first))
+				if (balanceFactory > 1 && getBF(root->left) >= 0)
 					return (rightRotate(root));
 				// left right case
-				if (balanceFactory > 1 && _compare(root->left->data.first, root->data.first))
+				if (balanceFactory > 1 && getBF(root->left) < 0)
 				{
 					root->left = (leftRotate(root->left));
 					return (rightRotate(root));
 				}
 				// right right case
-				if (balanceFactory < -1 && _compare(root->right->data.first, root->data.first))
+				if (balanceFactory < -1 && getBF(root->right) <= 0)
 					return (leftRotate(root));
 				// right left case
-				if (balanceFactory < -1 && _compare(root->data.first, root->right->data.first))
+				if (balanceFactory < -1 && getBF(root->right) > 0)
 				{
 					root->right = (rightRotate(root->right));
 					return (leftRotate(root));
