@@ -24,18 +24,18 @@ namespace ft
 		public:
 			Avl		_avl;
 			Node*	_node;
-			Node*	_root;
+			Node**	_root;
 
 		public:
 			// construct && destruct
 			iterator() : _avl(), _node(NULL), _root(NULL) {};
-			iterator(Node* node, Node* root) : _avl(), _node(node), _root(root) {};
+			iterator(Node* node, Node** root) : _avl(), _node(node), _root(root) {};
 			iterator(const iterator &x) :_node(x._node), _root(x._root) {}
 			~iterator() {};
 
 			operator const_iterator<T,Node, Avl>()
 			{
-				return const_iterator<T,Node, Avl>(this->_node, this->_root);
+				return const_iterator<T,Node, Avl>(this->_node, *_root);
 			}
 
 			iterator	operator = (const iterator &x)
@@ -59,20 +59,19 @@ namespace ft
 				return (&this->_node->data);
 			}
 			iterator& operator ++ () {
-				_node = _avl.next_node(_root, _node);
+				_node = _avl.next_node(*_root, _node);
 				return (*this);
 			}
 			iterator operator ++ (int) {
-				
 				iterator _old = *this;
-				_node = _avl.next_node(_root, _node);
+				_node = _avl.next_node(*_root, _node);
 				return _old;
 			}
 			iterator& operator -- () {
-				if (_node == _avl.minNode(_root) || _node == NULL)
-					_node = _avl.maxNode(_root);
+				if (_node == _avl.minNode(*_root) || _node == NULL)
+					_node = _avl.maxNode(*_root);
 				else
-					_node = _avl.previous_node(_root, _node);
+					_node = _avl.previous_node(*_root, _node);
 				return (*this);
 			}
 			iterator operator -- (int) {

@@ -58,19 +58,23 @@ namespace ft
 			// destructor
 			~map() {};
 
-			// void test() {
-			// 	for (int i = 0; i < 20; i++)
-			// 	{
-			// 		_root = _avlTree.insert(_root, ft::make_pair(i, 10 + i));
-			// 	}
-			// 	for (int i = 0; i < 20; i++)
-			// 	{
-			// 		std::cout << " i = " << i << std::endl;
-			// 		_root = _avlTree.delete_node(_root, i);
-			// 		// _root = _avlTree.insert(_root, ft::make_pair(i, 10 + i));
-			// 	}
-			// 	// std::cout << _root->data.first << std::endl;
-			// };
+			void test() {
+				for (int i = 0; i < 100; i++)
+				{
+					_root = _avlTree.insert(_root, ft::make_pair(i, 10 + i));
+				}
+				// for (size_t i = 0; i < 10; i++)
+				for (iterator it = begin(); it != end(); it++)
+				{
+					// std::cout << " i = " << i << std::endl;
+					std::cout << " it->first = " << it->first << std::endl;
+					_root = _avlTree.delete_node(_root, it->first);
+					std::cout << "-----------------" << std::endl;
+					// _root = _avlTree.insert(_root, ft::make_pair(i, 10 + i));
+				}
+				std::cout << size() << std::endl;
+				// std::cout << _root->data.first << std::endl;
+			};
 
 			// copy assigmnet operator
 			map& operator= (const map& x) {
@@ -100,13 +104,13 @@ namespace ft
 
 			// Iterators:
 			iterator begin() {
-				return iterator(_avlTree.minNode(_root), _root);
+				return iterator(_avlTree.minNode(_root), &_root);
 			};
 			const_iterator begin() const {
 				return const_iterator(_avlTree.minNode(_root), _root);
 			};
 			iterator end() {
-				return iterator(NULL, _root);
+				return iterator(NULL, &_root);
 			};
 			const_iterator end() const {
 				return const_iterator(NULL, _root);
@@ -157,7 +161,7 @@ namespace ft
 					insert(*first);
 			};
 			void erase (iterator position) { // (1)
-				_root = _avlTree.delete_node(position._root, position._node->data.first);
+				_root = _avlTree.delete_node(*position._root, position._node->data.first);
 			};
 			size_type erase (const key_type& k) { // (2)
 				size_type __size = size();
@@ -209,7 +213,7 @@ namespace ft
 					else if (_compare(tmp->data.first, k))
 						tmp = tmp->right;
 					else
-						return (iterator(tmp, _root));
+						return (iterator(tmp, &_root));
 				}
 				return end();
 			};
@@ -237,7 +241,7 @@ namespace ft
 				if (_compare(maxNode->data.first, k))
 					return end();
 				else if (_compare(k, minNode->data.first))
-					return (iterator(minNode, _root));
+					return (iterator(minNode, &_root));
 				else
 					return (find(k));
 			};
@@ -257,7 +261,7 @@ namespace ft
 				if (_compare(maxNode->data.first, k))
 					return end();
 				else if (_compare(k, minNode->data.first))
-					return (iterator(minNode, _root));
+					return (iterator(minNode, &_root));
 				else
 					return (++(find(k)));
 			};

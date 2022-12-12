@@ -149,7 +149,7 @@ namespace ft
 			{
 				Node*	parent = NULL;
 
-				while (true)
+				while (root != NULL)
 				{
 					if (_compare(key, root->data.first))
 					{
@@ -215,7 +215,7 @@ namespace ft
 							tmp = root->left;
 						else
 							tmp = root->right;
-						if (!tmp) // if no childs
+						if (tmp == NULL) // if no childs
 						{
 							_nodeAllocator.destroy(root);
 							_nodeAllocator.deallocate(root, 1);
@@ -238,8 +238,6 @@ namespace ft
 						root->left = delete_node(root->left, tmp->data.first);
 					}
 				}
-				if (root == NULL)
-					return NULL;
 				root->height = 1 + (std::max(get_height(root->left), get_height(root->right)));
 
 				// get balance factory
@@ -276,7 +274,7 @@ namespace ft
 				_nodeAllocator.destroy(*root);
 				_nodeAllocator.deallocate(*root, 1);
 			}
-			void clear(Node **root)
+			void	clear(Node **root)
 			{
 				clearNode(root);
 				*root = NULL;
