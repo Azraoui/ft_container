@@ -58,24 +58,6 @@ namespace ft
 			// destructor
 			~map() {};
 
-			void test() {
-				for (int i = 0; i < 100; i++)
-				{
-					_root = _avlTree.insert(_root, ft::make_pair(i, 10 + i));
-				}
-				// for (size_t i = 0; i < 10; i++)
-				for (iterator it = begin(); it != end(); it++)
-				{
-					// std::cout << " i = " << i << std::endl;
-					std::cout << " it->first = " << it->first << std::endl;
-					_root = _avlTree.delete_node(_root, it->first);
-					std::cout << "-----------------" << std::endl;
-					// _root = _avlTree.insert(_root, ft::make_pair(i, 10 + i));
-				}
-				std::cout << size() << std::endl;
-				// std::cout << _root->data.first << std::endl;
-			};
-
 			// copy assigmnet operator
 			map& operator= (const map& x) {
 				if (size())
@@ -236,44 +218,26 @@ namespace ft
 				return (0);
 			};
 			iterator lower_bound (const key_type& k) {
-				_nodeType*	maxNode = _avlTree.maxNode(_root);
-				_nodeType*	minNode = _avlTree.minNode(_root);
-				if (_compare(maxNode->data.first, k))
-					return end();
-				else if (_compare(k, minNode->data.first))
-					return (iterator(minNode, &_root));
-				else
-					return (find(k));
+				iterator it(find(k));
+				if (it != end())
+					return it;
+				_nodeType* tmp = _avlTree.next_node(_root, k);
+				return iterator(tmp, &_root);
 			};
 			const_iterator lower_bound (const key_type& k) const {
-				_nodeType*	maxNode = _avlTree.maxNode(_root);
-				_nodeType*	minNode = _avlTree.minNode(_root);
-				if (_compare(maxNode->data.first, k))
-					return end();
-				else if (_compare(k, minNode->data.first))
-					return (const_iterator(minNode, _root));
-				else
-					return (find(k));
+				const_iterator it(find(k));
+				if (it != end())
+					return it;
+				_nodeType* tmp = _avlTree.next_node(_root, k);
+				return const_iterator(tmp, _root);
 			};
 			iterator upper_bound (const key_type& k) {
-				_nodeType*	maxNode = _avlTree.maxNode(_root);
-				_nodeType*	minNode = _avlTree.minNode(_root);
-				if (_compare(maxNode->data.first, k))
-					return end();
-				else if (_compare(k, minNode->data.first))
-					return (iterator(minNode, &_root));
-				else
-					return (++(find(k)));
+				_nodeType* tmp = _avlTree.next_node(_root, k);
+				return iterator(tmp, &_root);
 			};
 			const_iterator upper_bound (const key_type& k) const {
-				_nodeType*	maxNode = _avlTree.maxNode(_root);
-				_nodeType*	minNode = _avlTree.minNode(_root);
-				if (_compare(maxNode->data.first, k))
-					return end();
-				else if (_compare(k, minNode->data.first))
-					return (const_iterator(minNode, _root));
-				else
-					return (++(find(k)));
+				_nodeType* tmp = _avlTree.next_node(_root, k);
+				return const_iterator(tmp, _root);
 			};
 			ft::pair<const_iterator,const_iterator> equal_range (const key_type& k) const {
 				return (ft::make_pair(lower_bound(k), upper_bound(k)));

@@ -182,6 +182,26 @@ namespace ft
 					return parent;
 				}
 			}
+			Node*	next_node(Node* root, keyType k) const
+			{
+				Node* parent = NULL;
+				while (root != NULL)
+				{
+					if (_compare(k, root->data.first))
+					{
+						parent = root;
+						root = root->left;
+					}
+					else if (_compare(root->data.first, k)) {
+						root = root->right;
+					}
+					else {
+						parent = (root->right) ? minNode(root->right) : parent;
+						break ;
+					}
+				}
+				return parent;
+			}
 			Node*	previous_node(Node* root, Node* node)
 			{
 				Node* parent = findParent(root, node->data.first);

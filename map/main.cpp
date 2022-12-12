@@ -1897,6 +1897,7 @@ void testOperations()
         cond = (cond && (m.lower_bound(120)->first == ft_m.lower_bound(120)->first));
         cond = (cond && (m.lower_bound(70)->first == ft_m.lower_bound(70)->first));
 
+            // std::cout << "i was here -----------------------------------------------------" << std::endl;// ---------------------------
         cond = (cond && (c_m.lower_bound(15)->first == c_ft_m.lower_bound(15)->first));
         cond = (cond && (c_m.lower_bound(65)->first == c_ft_m.lower_bound(65)->first));
         cond = (cond && (c_m.lower_bound(63)->first == c_ft_m.lower_bound(63)->first));
