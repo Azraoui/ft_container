@@ -56,7 +56,7 @@ namespace ft
 			};
 
 			// destructor
-			~map() {};
+			~map() {this->clear();};
 
 			// copy assigmnet operator
 			map& operator= (const map& x) {
