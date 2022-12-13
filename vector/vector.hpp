@@ -71,6 +71,10 @@ namespace ft
 					_alloc.deallocate(_buffer, _capacity);
 				_buffer = NULL;
 			};
+			vector & operator = (const vector & v) {
+				assign(v.begin(), v.end());
+				return *this;
+			}
 
 			// Iterators:
 			iterator	begin() {
@@ -107,12 +111,32 @@ namespace ft
 			size_type max_size() const {
 				return std::min<size_type>(std::numeric_limits<difference_type>::max(), _alloc.max_size());
 			};
+			void reserve (size_type n) {
+				if (n <= _capacity)
+					return ;
+				if (n > max_size())
+					throw std::length_error("allocator<T>::allocate(size_t n) 'n' exceeds maximum supported size");
+				pointer tmp_buffer = NULL;
+				tmp_buffer = _alloc.allocate(n);
+				size_type i = 0;
+				for (; i < _size; i++)
+					_alloc.construct(&tmp_buffer[i], _buffer[i]);
+				_buffer.clear();
+				_alloc.deallocate(&_buffer, &_capacity);
+				_buffer = tmp_buffer;
+				_size = i;
+				_capacity = n;
+			};
+			void resize (size_type n, value_type val = value_type()) {
+				if (n > _capacity)
+					reserve(n);
+				for (size_type i = n; i < _size; i++)
+					_alloc.destroy(_buffer + i);
+				for (size_type i = _size; i < n; i++)
+					_alloc.construct(_buffer + i, val);
+			};
 
 			// Element access:
-			vector & operator = (const vector & v) {
-				assign(v.begin(), v.end());
-				return *this;
-			}
 			reference operator[] (size_type n){
 				return this->_buffer[n];
 			}
@@ -125,6 +149,16 @@ namespace ft
 			reference back() {
 				return _buffer[_size - 1];
 			}
+			reference at (size_type n) {
+				if (n >= _size)
+					throw std::out_of_range("index out of range");
+				return this->operator[n];
+			};
+			const_reference at (size_type n) const {
+				if (n >= _size)
+					throw std::out_of_range("index out of range");
+				return this->operator[n];
+			};
 
 			// Modifiers:
 			template <class InputIterator>
@@ -151,22 +185,6 @@ namespace ft
 					_alloc.construct(_buffer + i, val);
 				_size = i;
 			};
-			void reserve (size_type n) {
-				if (n <= _capacity)
-					return ;
-				if (n > max_size())
-					throw std::length_error("allocator<T>::allocate(size_t n) 'n' exceeds maximum supported size");
-				pointer tmp_buffer = NULL;
-				tmp_buffer = _alloc.allocate(n);
-				size_type i = 0;
-				for (; i < _size; i++)
-					_alloc.construct(&tmp_buffer[i], _buffer[i]);
-				_buffer.clear();
-				_alloc.deallocate(&_buffer, &_capacity);
-				_buffer = tmp_buffer;
-				_size = i;
-				_capacity = n;
-			};
 			void push_back(const_reference value) {
 				if (!_capacity || _capacity == _size)
 					reserve(_capacity > 0 ? (_capacity * 2) : 1);
@@ -181,9 +199,10 @@ namespace ft
 				_alloc.distroy(_buffer + _size);
 			};
 			void swap (vector& x) {
-				vector tmp(x);
-				x = tmp;
-				*this = x;
+				std::swap(_alloc, x._alloc);
+				std::swap(_size, x._size);
+				std::swap(_capacity, x._capacity);
+				std::swap(_buffer, x._buffer);
 			};
 			void clear() {
 				if (!_buffer)
