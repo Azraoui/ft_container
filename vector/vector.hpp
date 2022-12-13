@@ -67,10 +67,10 @@ namespace ft
 				*this = x;
 			};
 			~vector() {
-				// clear();
-				// if (_buffer != NULL && _capacity != 0)
-				// 	_alloc.deallocate(_buffer, _capacity);
-				// _buffer = NULL;
+				clear();
+				if (_buffer != NULL && _capacity != 0)
+					_alloc.deallocate(_buffer, _capacity);
+				_buffer = NULL;
 			};
 			vector & operator = (const vector & v) {
 				assign(v.begin(), v.end());
@@ -119,24 +119,22 @@ namespace ft
 				return std::min<size_type>(std::numeric_limits<difference_type>::max(), _alloc.max_size());
 			};
 			void reserve (size_type n) {
-				if (n <= _capacity)
-					return ;
-				if (n > max_size())
-					throw std::length_error("allocator<T>::allocate(size_t n) 'n' exceeds maximum supported size");
-				pointer tmp_buffer = NULL;
-				tmp_buffer = _alloc.allocate(n);
-				size_type i = 0;
-				for (; i < _size; i++)
-					_alloc.construct(&tmp_buffer[i], _buffer[i]);
-				// clear();
-				// _alloc.deallocate(_buffer, _capacity);
-				_buffer = tmp_buffer;
-				_size = i;
-				_capacity = n;
+				pointer	tmpBuffer;
+				size_type tmpSize = _size;
+				if (n > _capacity)
+				{
+					tmpBuffer = _alloc.allocate(n);
+					for (size_type i = 0; i < _size; i++)
+						_alloc.construct(tmpBuffer + i, _buffer[i]);
+					clear();
+					_alloc.deallocate(_buffer, _capacity);
+					_capacity = n;
+					_size = tmpSize;
+					_buffer = tmpBuffer;
+				}
 			};
 			void resize (size_type n, value_type val = value_type()) {
-				if (n > _capacity)
-					reserve(n);
+				reserve(n);
 				for (size_type i = n; i < _size; i++)
 					_alloc.destroy(_buffer + i);
 				for (size_type i = _size; i < n; i++)
@@ -175,7 +173,9 @@ namespace ft
 
 			// Modifiers:
 			template <class InputIterator>
-			void assign (InputIterator first, InputIterator last) { // Range version
+			void assign (typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type first,
+			InputIterator last)
+			{ // Range version
 				size_type dist = static_cast<size_type>(std::distance(first, last));
 				if (dist < 0)
 					throw std::length_error("negative distance");
