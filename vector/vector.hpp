@@ -52,7 +52,9 @@ namespace ft
 			}
 			template <class InputIterator>
 			vector (InputIterator first, InputIterator last,
-			typename ft::enable_if<!ft::is_integral<InputIterator>::value, allocator_type>::type const &alloc = allocator_type()) : _alloc(alloc){ // range constructor
+			typename ft::enable_if<!ft::is_integral<InputIterator>::value, allocator_type>::type const &alloc = allocator_type())
+			: _alloc(alloc)
+			{ // range constructor
 				this->_size = 0;
 				this->_capacity = 0;
 				this->_buffer = NULL;
@@ -65,10 +67,10 @@ namespace ft
 				*this = x;
 			};
 			~vector() {
-				clear();
-				if (_buffer != NULL && _capacity != 0)
-					_alloc.deallocate(_buffer, _capacity);
-				_buffer = NULL;
+				// clear();
+				// if (_buffer != NULL && _capacity != 0)
+				// 	_alloc.deallocate(_buffer, _capacity);
+				// _buffer = NULL;
 			};
 			vector & operator = (const vector & v) {
 				assign(v.begin(), v.end());
@@ -126,8 +128,8 @@ namespace ft
 				size_type i = 0;
 				for (; i < _size; i++)
 					_alloc.construct(&tmp_buffer[i], _buffer[i]);
-				clear();
-				_alloc.deallocate(_buffer, _capacity);
+				// clear();
+				// _alloc.deallocate(_buffer, _capacity);
 				_buffer = tmp_buffer;
 				_size = i;
 				_capacity = n;
@@ -257,10 +259,13 @@ namespace ft
 					_alloc.construct(&_buffer[i], _tmpBuffer[i - n]);
 					_alloc.destroy(&_tmpBuffer[i - n]);
 				}
-				_alloc.deallocate(_tmpBuffer, _size - n - pos);
+				// _alloc.deallocate(_tmpBuffer, _size - n - pos);
 			};
 			template <class InputIterator>
-			void insert (iterator position, InputIterator first, InputIterator last) { // range insert
+			void insert (iterator position,
+					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type first,
+					InputIterator last)
+			{ // range insert
 				size_type pos = static_cast<size_type>(std::distance(begin(), position));
 				if (pos < 0)
 					return;
@@ -283,7 +288,7 @@ namespace ft
 					_alloc.construct(&_buffer[i], _tmpBuffer[i - dist]);
 					_alloc.destroy(&_tmpBuffer[i - dist]);
 				}
-				_alloc.deallocate(_tmpBuffer, _size - dist - pos);
+				// _alloc.deallocate(_tmpBuffer, (_size - pos - dist));
 			};
 
 			iterator erase (iterator position) {
