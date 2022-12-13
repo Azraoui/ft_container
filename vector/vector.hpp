@@ -43,12 +43,15 @@ namespace ft
 				this->_buffer = NULL;
 				this->_alloc = alloc;
 			}
-			explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _alloc(alloc){ // fill constructor
+			explicit vector (size_type n, const value_type& val = value_type(),
+				const allocator_type& alloc = allocator_type())
+				: _alloc(alloc)
+			{ // fill constructor
 				this->_size = 0;
 				this->_capacity = 0;
 				this->_buffer = NULL;
 				// need insert here
-				insert(begin(), n, val);
+				this->insert(begin(), n, val);
 			}
 			template <class InputIterator>
 			vector (InputIterator first, InputIterator last,
@@ -58,7 +61,7 @@ namespace ft
 				this->_size = 0;
 				this->_capacity = 0;
 				this->_buffer = NULL;
-				size_type dist = static_cast<size_type>(std::distance(first, last));
+				difference_type dist = std::distance(first, last);
 				if (dist < 0)
 					throw std::length_error("negative distance");
 				insert(begin(), first, last);
@@ -176,7 +179,7 @@ namespace ft
 			void assign (typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type first,
 			InputIterator last)
 			{ // Range version
-				size_type dist = static_cast<size_type>(std::distance(first, last));
+				size_type dist = last - first;
 				if (dist < 0)
 					throw std::length_error("negative distance");
 				if (dist > _capacity)
@@ -225,51 +228,40 @@ namespace ft
 				this->_size = 0;
 			}
 			iterator insert (iterator position, const value_type& val) { // single element insert
-				size_type pos = static_cast<size_type>(std::distance(begin(), position));
-				if (pos < 0)
-					return position;
-				if (!_capacity || _capacity == _size)
-					reserve(_capacity > 0 ? (_capacity * 2) : 1);
-				for (size_type i = _size - 1; i >= pos && _size > 0; --i)
+				size_type i = static_cast<size_type>(position - begin());
+				if (_size >= _capacity && i <= _size)
+					reserve((_capacity) ? _capacity * 2 : 1);
+				for (size_type index = _size -1; _size > 0 && index >= i && index; --index)
 				{
-					_alloc.construct(_buffer + (i + 1), _buffer[i]);
-					_alloc.destroy(&_buffer[i]);
+					_alloc.construct(_buffer + index + 1, _buffer[index]);
+					_alloc.destroy(&_buffer[index]);
 				}
-				_alloc.construct(_buffer + pos, val);
+				_alloc.construct(_buffer + i, val);
 				_size += 1;
-				return (iterator(_buffer + pos));
+				return iterator(_buffer + i);
 			};
 			void insert (iterator position, size_type n, const value_type& val) { // fill insert
-				size_type pos = static_cast<size_type>(std::distance(begin(), position));
-				if (pos < 0)
-					return ;
-				reserve(n + _capacity);
-				pointer _tmpBuffer = _alloc.allocate(_size - pos);
-				for (size_type i = 0; i < (_size - pos); i++)
-					_alloc.construct(&_tmpBuffer[i], _buffer[pos + i]);
-				for (size_type i = pos; i < pos + n; i++)
+				size_type i = static_cast<size_type>(position - begin());
+				if (_size + n >= _capacity && i <= _size)
+					reserve(_capacity + n);
+				for (size_type index = _size -1; _size > 0 && index >= i && index; --index)
 				{
-					_alloc.destroy(&_buffer[i]);
-					_alloc.construct(&_buffer[i], val);
+					_alloc.construct(_buffer + index + n, _buffer[index]);
+					_alloc.destroy(&_buffer[index]);
 				}
+				for (size_type index = i; index < n + i; index++)
+					_alloc.construct(_buffer + index, val);
 				_size += n;
-				for (size_type i = pos + n; i < _size; i++)
-				{
-					_alloc.destroy(&_buffer[i]);
-					_alloc.construct(&_buffer[i], _tmpBuffer[i - n]);
-					_alloc.destroy(&_tmpBuffer[i - n]);
-				}
-				// _alloc.deallocate(_tmpBuffer, _size - n - pos);
 			};
 			template <class InputIterator>
 			void insert (iterator position,
 					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type first,
 					InputIterator last)
 			{ // range insert
-				size_type pos = static_cast<size_type>(std::distance(begin(), position));
+				size_type pos = position - begin();
 				if (pos < 0)
 					return;
-				size_type dist = static_cast<size_type>(std::distance(first, last));
+				difference_type dist = std::distance(first, last);
 				if (dist < 0)
 					return;
 				reserve(dist + _capacity);
@@ -292,8 +284,7 @@ namespace ft
 			};
 
 			iterator erase (iterator position) {
-				size_type pos = static_cast<size_type>(std::distance(begin(), position));
-
+				difference_type pos = std::distance(begin(), position);
 				_alloc.destroy(&_buffer[pos]);
 				_size -= 1;
 				for (size_type i = pos; i < _size; i++)
@@ -305,7 +296,7 @@ namespace ft
 			};
 			iterator erase (iterator first, iterator last) {
 				size_type pos = static_cast<size_type>(std::distance(begin(), first));
-				size_type dist = static_cast<size_type>(std::distance(first, last));
+				difference_type dist = std::distance(first, last);
 				for (size_type i = pos; i < dist + pos; i++)
 					_alloc.destroy(&_buffer[i]);
 				_size -= dist;
