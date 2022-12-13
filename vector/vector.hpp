@@ -76,8 +76,20 @@ namespace ft
 			iterator	begin() {
 				return	iterator(_buffer);
 			};
+			const_iterator begin() const {
+				return const_iterator(_buffer);
+			};
 			iterator	end() {
 				return iterator(_buffer + _size);
+			};
+			const_iterator end() const {
+				return const_iterator(_buffer + _size);
+			};
+			reverse_iterator rbegin() {
+				return reverse_iterator(end());
+			};
+			const_reverse_iterator rbegin() const {
+				return const_reverse_iterator(begin());
 			};
 
 			// Capacity:
