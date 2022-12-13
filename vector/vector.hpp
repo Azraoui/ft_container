@@ -5,6 +5,7 @@
 #include <algorithm>
 #include "./iterator_traits.hpp"
 #include "./random_access_iterator.hpp"
+#include "./reverse_iterator.hpp"
 #include "./utils.hpp"
 
 namespace ft
@@ -20,6 +21,9 @@ namespace ft
 			typedef	typename	allocator_type::pointer							pointer;
 			typedef	typename	allocator_type::const_pointer					const_pointer;
 			typedef	typename	ft::Random_access_iterator<pointer>				iterator;
+			typedef	typename	ft::Random_access_iterator<const_pointer>		const_iterator;
+			typedef	typename	ft::reverse_iterator<iterator>					reverse_iterator;
+			typedef	typename	ft::reverse_iterator<const_iterator>			const_reverse_iterator;
 			typedef typename	ft::Iterator_traits<iterator>::difference_type	difference_type;
 			typedef 			size_t											size_type;
 
@@ -31,6 +35,43 @@ namespace ft
 
 		// Member functions
 		public:
+
+		// ------------------------------------------
+			explicit vector (const allocator_type& alloc = allocator_type()) { // default constructor
+				this->_size = 0;
+				this->_capacity = 0;
+				this->_buffer = NULL;
+				this->_alloc = alloc;
+			}
+			explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) { // fill constructor
+				this->_size = 0;
+				this->_capacity = 0;
+				this->_buffer = NULL;
+				this->_alloc(alloc);
+				// need insert here
+				insert(begin(), n, val);
+			}
+			template <class InputIterator>
+			vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) { // range constructor
+				this->_size = 0;
+				this->_capacity = 0;
+				this->_buffer = NULL;
+				this->_alloc(alloc);
+				size_type dist = static_cast<size_type>(std::distance(first, last));
+				if (dist < 0)
+					throw std::length_error("negative distance");
+				insert(begin(), first, last);
+			};
+			vector (const vector& x) : _size(0), _capacity(0), _buffer(NULL){ // copy constructor
+				*this = x;
+			};
+			~vector() {
+				clear();
+				if (_buffer != NULL && _capacity != 0)
+					_alloc.deallocate(_buffer, _capacity);
+				_buffer = NULL;
+			};
+
 			// Iterators:
 			iterator	begin() {
 				return	iterator(_buffer);
@@ -235,41 +276,6 @@ namespace ft
 				return _alloc;
 			};
 
-		// ------------------------------------------
-			explicit vector (const allocator_type& alloc = allocator_type()) { // default constructor
-				this->_size = 0;
-				this->_capacity = 0;
-				this->_buffer = NULL;
-				this->_alloc = alloc;
-			}
-			explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) { // fill constructor
-				this->_size = 0;
-				this->_capacity = 0;
-				this->_buffer = NULL;
-				this->_alloc(alloc);
-				// need insert here
-				insert(begin(), n, val);
-			}
-			template <class InputIterator>
-			vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) { // range constructor
-				this->_size = 0;
-				this->_capacity = 0;
-				this->_buffer = NULL;
-				this->_alloc(alloc);
-				size_type dist = static_cast<size_type>(std::distance(first, last));
-				if (dist < 0)
-					throw std::length_error("negative distance");
-				insert(begin(), first, last);
-			};
-			vector (const vector& x) : _size(0), _capacity(0), _buffer(NULL){ // copy constructor
-				*this = x;
-			};
-			~vector() {
-				clear();
-				if (_buffer != NULL && _capacity != 0)
-					_alloc.deallocate(_buffer, _capacity);
-				_buffer = NULL;
-			};
 	}; // end of class;
 
 	// Non-member function overloads
