@@ -28,7 +28,7 @@ namespace ft
 			 * @brief Default Constructor
 			 * A a;
 			 */
-			Random_access_iterator() {
+			Random_access_iterator() : __base(NULL) {
 			};
 			/**
 			 * @brief Paramater Constructor
@@ -44,6 +44,14 @@ namespace ft
 			Random_access_iterator(Random_access_iterator const &obj){
 				*this = obj;
 			};
+			/**
+			 * @brief template copy constructer
+			 */
+			template <typename T>
+			Random_access_iterator(Random_access_iterator<T> const &x)
+			{
+				__base = x.base();
+			}
 			/**
 			 * @brief overload assigmnet operator
 			 * A a = b;
@@ -192,4 +200,19 @@ namespace ft
 				return __base[_p];
 			}
 	};
+
+	// operator+
+	template <class Iterator>
+	Random_access_iterator<Iterator> operator+ (typename Random_access_iterator<Iterator>::difference_type n, 
+	const Random_access_iterator<Iterator>& rev_it) {
+		return (rev_it + n);
+	};
+
+	// operator-
+	template <class Iterator>
+	typename Random_access_iterator<Iterator>::difference_type operator- (const Random_access_iterator<Iterator>& lhs,
+	const Random_access_iterator<Iterator>& rhs) {
+		return (rhs.base() - lhs.base());
+	};
+
 }

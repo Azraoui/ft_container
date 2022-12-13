@@ -52,11 +52,10 @@ namespace ft
 				insert(begin(), n, val);
 			}
 			template <class InputIterator>
-			vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) { // range constructor
+			vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) : _alloc(alloc){ // range constructor
 				this->_size = 0;
 				this->_capacity = 0;
 				this->_buffer = NULL;
-				this->_alloc(alloc);
 				size_type dist = static_cast<size_type>(std::distance(first, last));
 				if (dist < 0)
 					throw std::length_error("negative distance");
@@ -93,6 +92,12 @@ namespace ft
 				return reverse_iterator(end());
 			};
 			const_reverse_iterator rbegin() const {
+				return const_reverse_iterator(end());
+			};
+			reverse_iterator rend() {
+				return reverse_iterator(begin());
+			};
+			const_reverse_iterator rend() const {
 				return const_reverse_iterator(begin());
 			};
 
@@ -146,18 +151,24 @@ namespace ft
 			reference front() {
 				return _buffer[0];
 			}
+			const_reference front() const{
+				return _buffer[0];
+			}
 			reference back() {
 				return _buffer[_size - 1];
 			}
+			const_reference back() const {
+				return _buffer[_size - 1];
+			};
 			reference at (size_type n) {
 				if (n >= _size)
 					throw std::out_of_range("index out of range");
-				return this->operator[n];
+				return _buffer[n];
 			};
 			const_reference at (size_type n) const {
 				if (n >= _size)
 					throw std::out_of_range("index out of range");
-				return this->operator[n];
+				return _buffer[n];
 			};
 
 			// Modifiers:

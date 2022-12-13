@@ -1,14 +1,14 @@
 NAME = exe
 
-MAIN = ./main.cpp
+MAIN = main.cpp
 
 SRC = $(MAIN)
 
-INC = ./vector/*
+INC = ./*.hpp
 
 DBUG = -fsanitize=address -g
 
-FLAG = -Wall -Wextra -Werror -std=c++98 $(DBUG)
+FLAG = -Wall -Wextra -Werror -std=c++98 #$(DBUG)
 
 CPP = c++ $(FLAG)
 
