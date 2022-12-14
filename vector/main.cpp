@@ -951,7 +951,6 @@ void vector_tests(void)
             /*------------------ std::vectors ---------------------*/
             std::vector<std::string> v1(1e6, "string2");
             start = get_time();
-            v1.capacity();
             end = get_time();
             diff = end - start;
             diff = (diff) ? (diff * TIME_FAC) : TIME_FAC;
@@ -959,7 +958,6 @@ void vector_tests(void)
             /*------------------ ft::vectors ---------------------*/
             ft::vector<std::string> ft_v1(1e6, "string2");
             ualarm(diff * 1e3, 0);
-            ft_v1.capacity();
             ualarm(0, 0);
             /*----------------------------------------------------*/
         }
@@ -1840,7 +1838,6 @@ void vector_tests(void)
             it = v.insert(v.begin(), "hello");
             ft_it = ft_v.insert(ft_v.begin(), "hello");
             ft_it->length();
-
             s = v.size();
             ft_s = ft_v.size();
             c = v.capacity();
