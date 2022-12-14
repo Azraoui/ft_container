@@ -1,10 +1,13 @@
 NAME = exe
 
-MAIN = ./main.cpp
+MAIN = main.cpp
 
 SRC = $(MAIN)
 
-INC = ./map.hpp ../sharedUtils/utils.hpp ./srcs/avl.hpp ./iterators/*.hpp
+INC =	./ft_stack/stack.hpp ./ft_map/map.hpp \
+		./ft_map/srcs/avl.hpp ./ft_map/iterators/*.hpp\
+		./ft_vector/iterators/*.hpp ./ft_vector/vector.hpp\
+		./sharedUtils/*.hpp
 
 DBUG = -fsanitize=address -g
 
