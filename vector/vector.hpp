@@ -3,10 +3,10 @@
 #include <memory> // refernce to allocator
 #include <iostream>
 #include <algorithm>
-#include "./iterator_traits.hpp"
-#include "./random_access_iterator.hpp"
-#include "./reverse_iterator.hpp"
-#include "./utils.hpp"
+#include "./iterators/iterator_traits.hpp"
+#include "./iterators/random_access_iterator.hpp"
+#include "./iterators/reverse_iterator.hpp"
+#include "./utils/utils.hpp"
 
 namespace ft
 {
